@@ -342,63 +342,6 @@ export default function HomePage({
           </div>
         </div>
       </section>
-
-      {/* ==================== SECTION 3: MAIN EVENT ==================== */}
-      <section id="main-event" className="section event-section">
-        <div className="event-bg-decoration"></div>
-
-        <div className="section-container">
-
-          {/* Section Title Row */}
-          <div className="event-title-centered">
-            <h2 className="event-bento-title">Main Event</h2>
-          </div>
-
-          {/* Center Map Layout */}
-          <div className="event-center-map-layout">
-            <div className="center-map-wrapper">
-              {/* Decorative Elements */}
-              <div className="map-deco-circle"></div>
-              <div className="map-deco-dots"></div>
-
-              {/* The Map */}
-              <div className="center-map-frame">
-                <iframe
-                  title="Lokasi TEDxUNJ"
-                  src="https://maps.google.com/maps?q=Universitas%20Negeri%20Jakarta&t=&z=16&ie=UTF8&iwloc=&output=embed"
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  className="center-map-iframe"
-                ></iframe>
-              </div>
-
-              {/* Tilted Footers (When & Where) */}
-              <div className="map-footers">
-                
-                {/* WHEN */}
-                <div className="tilted-footer footer-when">
-                  <div className="footer-label">WHEN</div>
-                  <div className="footer-content">
-                    <span className="footer-big-text">12 SEP 2026</span>
-                    <span className="footer-sub-text">Sabtu, 08:30 WIB</span>
-                  </div>
-                </div>
-
-                {/* WHERE */}
-                <div className="tilted-footer footer-where">
-                  <div className="footer-label">WHERE</div>
-                  <div className="footer-content">
-                    <span className="footer-big-text">Auditorium UNJ</span>
-                    <span className="footer-sub-text">Kampus A, Jakarta Timur</span>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
     </>
   );
 }
