@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
   ShoppingCart,
@@ -20,7 +20,7 @@ export default function App() {
   const location = useLocation();
 
   // Navigation states
-  const [activeMenu, setActiveMenu] = useState('home');
+  const [, setActiveMenu] = useState('home');
 
   // Selected edition for Section B timeline (1.0 to 5.0)
   const [selectedEdition, setSelectedEdition] = useState(5);
@@ -92,17 +92,13 @@ export default function App() {
     setCartItems(prev => prev.filter(item => item.type !== type));
   };
 
-  const getCartTotalQty = () => {
-    return cartItems.reduce((acc, item) => acc + item.qty, 0);
-  };
-
   const getCartTotalPrice = () => {
     return cartItems.reduce((acc, item) => acc + (item.price * item.qty), 0);
   };
 
   // Scroll-triggered visibility for comparison cards in Section A
   const [cardsVisible, setCardsVisible] = useState(false);
-  const cardsRef = React.useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Reset visibility state on route changes

@@ -1,18 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {
-  X,
-  MapPin,
-  Calendar,
-  Bus,
-  Car,
   Sparkles,
   Award,
   Users,
   Camera,
   Music,
   Gift,
-  Armchair,
-  MessageSquare
+  Armchair
 } from 'lucide-react';
 
 interface EventPageProps {
@@ -32,9 +26,8 @@ interface Speaker {
   time: string;
 }
 
-export default function EventPage({ addToCart, ticketTypes }: EventPageProps) {
+export default function EventPage({ addToCart: _addToCart, ticketTypes: _ticketTypes }: EventPageProps) {
   const [selectedSpeaker, setSelectedSpeaker] = useState<Speaker | null>(null);
-  const [isSec5WindowOpen, setIsSec5WindowOpen] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 

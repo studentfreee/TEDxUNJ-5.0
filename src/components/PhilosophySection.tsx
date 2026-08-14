@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export default function PhilosophySection() {
   // bookState: 0 = Closed Cover, 1 = Learn & Create (learn-create.svg), 2 = Grow (grow.svg)

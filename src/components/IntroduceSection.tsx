@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function IntroduceSection() {
   return (
     <section id="introduce" className="introduce-section">
