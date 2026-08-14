@@ -1,448 +1,704 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {
-  ShoppingCart,
-  Flame,
+  X,
+  MapPin,
+  Calendar,
+  Bus,
+  Car,
   Sparkles,
-  Compass,
+  Award,
   Users,
-  Clock,
-  X
+  Camera,
+  Music,
+  Gift,
+  Armchair,
+  MessageSquare
 } from 'lucide-react';
 
 interface EventPageProps {
-  addToCart: (type: 'single' | 'double' | 'triple') => void;
-  ticketTypes: {
-    single: { id: string; name: string; price: number; desc: string };
-    double: { id: string; name: string; price: number; desc: string };
-    triple: { id: string; name: string; price: number; desc: string };
-  };
+  addToCart?: (type: 'single' | 'double' | 'triple') => void;
+  ticketTypes?: any;
+}
+
+interface Speaker {
+  id: string;
+  name: string;
+  role: string;
+  photo: string;
+  svgAsset?: string;
+  popupAsset?: string;
+  bio: string;
+  talkTitle: string;
+  time: string;
 }
 
 export default function EventPage({ addToCart, ticketTypes }: EventPageProps) {
-  const [selectedSpeaker, setSelectedSpeaker] = useState<any | null>(null);
-  const [timelineVisible, setTimelineVisible] = useState(false);
-  const timelineRef = useRef<HTMLDivElement>(null);
+  const [selectedSpeaker, setSelectedSpeaker] = useState<Speaker | null>(null);
+  const [isSec5WindowOpen, setIsSec5WindowOpen] = useState(false);
+  const modalRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setTimelineVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.15 }
-    );
-
-    if (timelineRef.current) {
-      observer.observe(timelineRef.current);
-    }
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
-
-  const speakersData = [
+  const speakersData: Speaker[] = [
     {
-      id: 'gates',
-      name: 'Bill Gates',
-      role: 'Microsoft Co-Founder & Philanthropist',
+      id: 'speaker-1',
+      name: 'Ajeng Asmarandhany',
+      role: 'Education Innovator & Youth Advocate',
+      photo: '/assets/bilgates.webp',
+      svgAsset: '/assets/betawi/speaker-ajeng.svg',
+      popupAsset: '/assets/betawi/popup-speaker-ajeng.svg',
+      talkTitle: 'Empowering Next-Gen Learners in Digital Era',
       time: '09:30 - 10:15 WIB',
-      talk: 'The Future of Innovation & Global Philanthropy',
-      bio: 'A technology pioneer, philanthropist, and business leader. Through the Gates Foundation, he focuses on global health, development, education, and fighting climate change.',
-      color: 'hsl(342, 85%, 65%)',
-      bgGradient: 'linear-gradient(135deg, hsl(342, 85%, 96%) 0%, hsl(25, 95%, 95%) 100%)',
-      image: '/assets/bilgates.webp',
-      icon: <Sparkles size={22} />,
-      instagram: 'https://instagram.com/thisisbillgates',
-      linkedin: 'https://linkedin.com/in/williamhgates'
+      bio: 'Prominent educational leader and speaker sharing inspiring insights on empowerment and youth development.'
     },
     {
-      id: 'xaviera',
-      name: 'Xaviera Putri',
-      role: 'Global Student & Content Creator',
+      id: 'speaker-2',
+      name: 'Ayu Sara Herlia',
+      role: 'Global Scholar & Content Creator',
+      photo: '/assets/xaviera.jpeg',
+      svgAsset: '/assets/betawi/speaker-ayu.svg',
+      popupAsset: '/assets/betawi/popup-speaker-ayu.svg',
+      talkTitle: 'Bridging Cultural Horizons & Creative Media',
       time: '10:30 - 11:15 WIB',
-      talk: 'Bridging Borders: Navigating Global Education & Creative Spaces',
-      bio: 'A prominent Indonesian student studying in South Korea who shares insights about education, technology, and cross-cultural learning, inspiring millions of young minds to grow globally.',
-      color: 'hsl(25, 95%, 65%)',
-      bgGradient: 'linear-gradient(135deg, hsl(25, 95%, 96%) 0%, hsl(85, 75%, 95%) 100%)',
-      image: '/assets/xaviera.jpeg',
-      icon: <Flame size={22} />,
-      instagram: 'https://instagram.com/xavieraputri',
-      linkedin: 'https://linkedin.com/in/xavieraputri'
+      bio: 'Computer science scholar and content creator passionate about empowering youth to excel globally.'
     },
     {
-      id: 'timothy',
-      name: 'Timothy Ronald',
-      role: 'Financial Educator & Entrepreneur',
+      id: 'speaker-3',
+      name: 'Rossa Farahdiba',
+      role: 'Creative Entrepreneur & Tech Strategist',
+      photo: '/assets/timoty.jpg',
+      svgAsset: '/assets/betawi/speaker-rossa.svg',
+      popupAsset: '/assets/betawi/popup-speaker-rossa.svg',
+      talkTitle: 'Redefining Wealth & Creative Economies for Gen Z',
       time: '13:00 - 13:45 WIB',
-      talk: 'Rethinking Wealth: Building the Creative Economy for Next Gen',
-      bio: 'A leading financial educator and entrepreneur in Indonesia, empowering youth with financial literacy and exploring new pathways in the digital creative economy.',
-      color: 'hsl(85, 75%, 60%)',
-      bgGradient: 'linear-gradient(135deg, hsl(85, 75%, 95%) 0%, hsl(205, 85%, 95%) 100%)',
-      image: '/assets/timoty.jpg',
-      icon: <Compass size={22} />,
-      instagram: 'https://instagram.com/timothyronald',
-      linkedin: 'https://linkedin.com/in/timothyronald'
+      bio: 'Leading creative entrepreneur fostering financial literacy and career acceleration for young generations.'
     },
     {
-      id: 'yudo',
-      name: 'Dr. Yudo Prasetyo',
-      role: 'Smart City & Geospatial Innovator',
+      id: 'speaker-4',
+      name: 'Dr. Muhammad Faisal',
+      role: 'Youth Culture Specialist & Sociologist',
+      photo: '/assets/bilgates.webp',
+      svgAsset: '/assets/betawi/speaker-maudy.svg',
+      popupAsset: '/assets/betawi/popup-speaker-ayu.svg',
+      talkTitle: 'Understanding Youth Dynamics & Social Evolution',
       time: '14:00 - 14:45 WIB',
-      talk: 'Mapping the Future: Smart Cities and Tech-Driven Communities',
-      bio: 'An expert in geospatial technology and smart city design, researching how mapping and spatial data can revolutionize community development, green infrastructure, and urban planning.',
-      color: 'hsl(275, 70%, 65%)',
-      bgGradient: 'linear-gradient(135deg, hsl(275, 70%, 96%) 0%, hsl(342, 85%, 96%) 100%)',
-      image: '/assets/yudo.webp',
-      icon: <Users size={22} />,
-      instagram: 'https://instagram.com/yudoprasetyo',
-      linkedin: 'https://linkedin.com/in/yudoprasetyo'
+      bio: 'Sociologist and youth culture specialist researching Indonesian generational evolution and social impact.'
+    },
+    {
+      id: 'speaker-5',
+      name: 'Maudy Ayunda',
+      role: 'Educator, Musician & Advocate',
+      photo: '/assets/xaviera.jpeg',
+      svgAsset: '/assets/betawi/speaker-maudy.svg',
+      popupAsset: '/assets/betawi/popup-speaker-ayu.svg',
+      talkTitle: 'Unlocking Potential & Continuous Lifelong Learning',
+      time: '15:00 - 15:45 WIB',
+      bio: 'Acclaimed educator, musician, and advocate for education and youth empowerment in Indonesia.'
+    },
+    {
+      id: 'speaker-6',
+      name: 'Maudy Ayunda',
+      role: 'Educator, Musician & Advocate',
+      photo: '/assets/timoty.jpg',
+      svgAsset: '/assets/betawi/speaker-maudy.svg',
+      popupAsset: '/assets/betawi/popup-speaker-ayu.svg',
+      talkTitle: 'The Next Chapter: Crafting Impactful Solutions',
+      time: '16:00 - 16:45 WIB',
+      bio: 'Acclaimed educator, musician, and advocate for education and youth empowerment in Indonesia.'
     }
   ];
 
+  const benefitsData = [
+    {
+      id: 'b1',
+      title: 'Inspiring Talks',
+      image: '/assets/betawi/ispiring-talk.png',
+      icon: <Sparkles size={20} />
+    },
+    {
+      id: 'b2',
+      title: 'Live Performances',
+      image: '/assets/betawi/live-performance.png',
+      icon: <Music size={20} />
+    },
+    {
+      id: 'b3',
+      title: 'Photobooth Area',
+      image: '/assets/betawi/fotoboth-area.png',
+      icon: <Camera size={20} />
+    },
+    {
+      id: 'b4',
+      title: 'Networking Session',
+      image: '/assets/betawi/network-session.png',
+      icon: <Users size={20} />
+    },
+    {
+      id: 'b5',
+      title: 'Interactive Tasks & Giveaways',
+      image: '/assets/betawi/interaktif-task.png',
+      icon: <Gift size={20} />
+    },
+    {
+      id: 'b6',
+      title: 'Official E-Certificate',
+      image: '/assets/betawi/official-certificate.png',
+      icon: <Award size={20} />
+    },
+    {
+      id: 'b7',
+      title: 'Comfortable Auditorium Seating',
+      image: '/assets/betawi/comfortable-seating.png',
+      icon: <Armchair size={20} />
+    }
+  ];
+
+  // Handle Keyboard Escape key to close modal & Trap focus for accessibility
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && selectedSpeaker) {
+        setSelectedSpeaker(null);
+      }
+    };
+
+    if (selectedSpeaker) {
+      document.body.style.overflow = 'hidden';
+      window.addEventListener('keydown', handleKeyDown);
+      setTimeout(() => closeButtonRef.current?.focus(), 50);
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'auto';
+    };
+  }, [selectedSpeaker]);
+
   return (
-    <div className="event-page-wrapper animate-fade-in">
-      {/* ==================== SECTION 1: EVENT HERO (THEME & DESCRIPTION) ==================== */}
-      <section className="event-hero section animate-fade-in">
-        <div className="kawung-bg" style={{ opacity: 0.05 }}></div>
-        <div className="ambient-glow glow-pink" style={{ top: '-15%', left: '5%', width: '550px', height: '550px', opacity: 0.15 }}></div>
-        <div className="ambient-glow glow-orange" style={{ bottom: '-15%', right: '5%', width: '550px', height: '550px', opacity: 0.15 }}></div>
-        
-        <div className="event-hero-canvas-layout">
-          {/* Left Side: Dramatic Typography Cluster (Pushed higher) */}
-          <div className="event-hero-editorial-panel shifted-upwards">
-            <h1 className="event-hero-theme-headline">
-              THE NEXT <br />
-              <span className="gradient-theme-title">CHAPTER</span>
-            </h1>
-            
-            <p className="event-hero-theme-description">
-              TEDxUNJ 5.0 carries the theme <strong>“The Next Chapter: Redefining How We Learn, Create, and Grow.”</strong> This theme is chosen to reflect the beginning of a new era where creativity, education, and the economy continue to evolve alongside the rapid development of technology and society. Through this theme, TEDxUNJ aims to spread inspiring ideas that encourage individuals to rethink the way they learn, create opportunities, and grow in an ever-changing world.
-            </p>
+    <div className="event-page-container">
+      {/* ==========================================
+         SECTION 1: MASKOT & LOGO (Node 33:31)
+         ========================================== */}
+      <section id="event-mascot-section" className="event-sec1-mascot">
+        {/* Background Batik Motif Layer (bg-event.svg) */}
+        <img
+          src="/assets/betawi/bg-event.svg"
+          alt="Event Hero Background Motif"
+          className="event-hero-batik-bg"
+        />
+        {/* Flanking Monas SVGs */}
+        <img
+          src="/assets/betawi/monas.svg"
+          alt="Monas Left"
+          className="event-monas event-monas--left"
+        />
+        <img
+          src="/assets/betawi/monas.svg"
+          alt="Monas Right"
+          className="event-monas event-monas--right"
+        />
+
+        {/* Top Gigi Balang Crown Trim Asset (balang-event.svg) */}
+        <img
+          src="/assets/betawi/balang-event.svg"
+          alt="Gigi Balang Crown Trim"
+          className="event-top-crown-svg"
+        />
+
+        {/* Bottom Flower & Fence Decoration Asset (bunga-hero.svg) */}
+        <img
+          src="/assets/betawi/bunga-hero.svg"
+          alt="Bunga Betawi Hero Decoration"
+          className="event-hero-flowers-svg"
+        />
+
+        <div className="event-sec1-inner">
+
+          {/* Central Hero Mascot & X-Leaf Emblem Cluster with Speech Bubble Overlays */}
+          <div className="event-mascot-cluster">
+            <div className="mascot-img-wrapper">
+              <img
+                src="/assets/betawi/bawi-teks.svg"
+                alt="BAWI Speech Bubble"
+                className="event-bawi-teks-speech"
+              />
+              <img
+                src="/assets/betawi/mascot_bawi.png"
+                alt="BAWI Mascot"
+                className="event-mascot-bawi"
+              />
+            </div>
+            <div className="emblem-img-wrapper">
+              <img
+                src="/assets/betawi/logo_31.png"
+                alt="TEDx X-Leaf Emblem"
+                className="event-x-emblem"
+              />
+              <img
+                src="/assets/betawi/logo-teks.svg"
+                alt="Logo Speech Bubble"
+                className="event-logo-teks-speech"
+              />
+            </div>
           </div>
 
-          {/* Right Side: Interactive Typographic Bento Canvas (No Logos) */}
-          <div className="event-hero-visual-horizon">
-            <div className="kinetic-bento-matrix-container">
-              {/* Pillar 1: LEARN */}
-              <div className="kinetic-matrix-card bento-learn animate-float-slow">
-                <div className="matrix-card-glow"></div>
-                <div className="matrix-card-header">
-                  <span className="card-num">01</span>
-                  <span className="card-status">ACTIVE</span>
-                </div>
-                <h3 className="matrix-title">LEARN</h3>
-                <p className="matrix-desc">Redefining perspectives through collaborative intellectual evolution.</p>
-              </div>
-
-              {/* Pillar 2: CREATE */}
-              <div className="kinetic-matrix-card bento-create animate-float-medium">
-                <div className="matrix-card-glow"></div>
-                <div className="matrix-card-header">
-                  <span className="card-num">02</span>
-                  <span className="card-status">ACTIVE</span>
-                </div>
-                <h3 className="matrix-title">CREATE</h3>
-                <p className="matrix-desc">Fostering breakthrough ideas at the intersection of tech & society.</p>
-              </div>
-
-              {/* Pillar 3: GROW */}
-              <div className="kinetic-matrix-card bento-grow animate-float-fast">
-                <div className="matrix-card-glow"></div>
-                <div className="matrix-card-header">
-                  <span className="card-num">03</span>
-                  <span className="card-status">ACTIVE</span>
-                </div>
-                <h3 className="matrix-title">GROW</h3>
-                <p className="matrix-desc">Expanding positive societal footprints and creative economies.</p>
-              </div>
-            </div>
+          {/* Ornate Frame Asset "tedxunj.svg" */}
+          <div className="event-badge-svg-wrapper">
+            <img
+              src="/assets/betawi/tedxunj.svg"
+              alt="TEDxUNJ 5.0 Badge"
+              className="event-badge-svg"
+            />
           </div>
         </div>
       </section>
 
-      {/* ==================== SECTION 2: SPEAKER LINEUP TIMELINE (OVERHAULED!) ==================== */}
-      <section className="event-speakers-section section">
-        <div className="kawung-bg" style={{ opacity: 0.08 }}></div>
-        <div className="section-container">
-          <div className="event-section-title-wrapper text-center">
-            <h2 className="speakers-main-title section-title-giant">Speaker Lineup</h2>
+      {/* ==========================================
+         SECTION 2: SPEAKER LIST + POPUP DETAIL (Node 96:2107 + 96:2330)
+         ========================================== */}
+      <section id="event-speakers-section" className="event-sec2-speakers">
+        {/* Dedicated Bottom Betawi Pager Row Layer (pager1.svg - 24 units) */}
+        <div className="event-sec2-pager-row">
+          {Array.from({ length: 24 }).map((_, idx) => (
+            <img
+              key={idx}
+              src="/assets/betawi/pager1.svg"
+              alt="Betawi Pagar"
+              className="event-sec2-pager-unit"
+            />
+          ))}
+        </div>
+
+        {/* Top Left Watermark: countdown_logo_watermark.svg */}
+        <div className="countdown-top-left-watermark">
+          <img src="/assets/betawi/countdown_logo_watermark.svg" alt="Countdown Logo Watermark Left" className="top-left-watermark-img" />
+        </div>
+
+        {/* Top Right Watermark: countdown_logo_watermark.svg (mirrored) */}
+        <div className="countdown-top-right-watermark">
+          <img src="/assets/betawi/countdown_logo_watermark.svg" alt="Countdown Logo Watermark Right" className="top-right-watermark-img" />
+        </div>
+
+        {/* Background Floral Pattern Tiles Layer */}
+        <div className="event-sec2-floral-pattern">
+          <img
+            src="/assets/betawi/floral_pattern.png"
+            alt="Floral Pattern Background"
+            className="event-floral-tile"
+          />
+          <img
+            src="/assets/betawi/floral_pattern.png"
+            alt="Floral Pattern Background"
+            className="event-floral-tile"
+          />
+          <img
+            src="/assets/betawi/floral_pattern.png"
+            alt="Floral Pattern Background"
+            className="event-floral-tile"
+          />
+          <img
+            src="/assets/betawi/floral_pattern.png"
+            alt="Floral Pattern Background"
+            className="event-floral-tile"
+          />
+        </div>
+
+        <div className="event-sec2-inner">
+          {/* Section Title SVG: "meet-speaker.svg" */}
+          <div className="event-sec2-title-wrapper">
+            <img
+              src="/assets/betawi/meet-speaker.svg"
+              alt="Meet Our Speakers!"
+              className="event-sec2-title-svg"
+            />
           </div>
 
-          <div 
-            ref={timelineRef}
-            className={`timeline-cards-container ${timelineVisible ? 'animate-active' : ''}`}
-          >
-            {speakersData.map((speaker, index) => (
-              <div 
-                key={speaker.id} 
-                className={`timeline-speaker-card ${index % 2 === 0 ? 'normal-direction' : 'reverse-direction'}`}
-                style={{ 
-                  '--accent-color': speaker.color, 
-                  background: speaker.bgGradient,
-                  '--delay': index
-                } as React.CSSProperties}
+          {/* 6 Speaker Window Frame SVG Grid (2 rows x 3 columns) */}
+          <div className="speakers-window-grid-6">
+            {speakersData.map((speaker) => (
+              <div
+                key={speaker.id}
+                className="speaker-svg-card"
+                onClick={() => setSelectedSpeaker(speaker)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    setSelectedSpeaker(speaker);
+                  }
+                }}
               >
-                {/* Image Section */}
-                <div className="timeline-card-image-box">
-                  <img src={speaker.image} alt={speaker.name} className="timeline-card-img" />
-                </div>
-
-                {/* Info Content Section */}
-                <div className="timeline-card-info-box">
-                  <div className="session-capsule-badge-box">
-                    <span className="session-capsule-badge-time">
-                      <Clock size={13} className="mr-1 inline align-middle" style={{ marginTop: '-2px' }} /> {speaker.time}
-                    </span>
-                  </div>
-
-                  <h3 className="timeline-card-speaker-name">{speaker.name}</h3>
-                  <p className="timeline-card-role-label">{speaker.role}</p>
-                  
-                  <div className="timeline-card-talk-theme">
-                    <span className="theme-quote">“</span>
-                    <span className="theme-title-text">{speaker.talk}</span>
-                    <span className="theme-quote">”</span>
-                  </div>
-
-                  {/* Clean and thin elegant View Detail action */}
-                  <button 
-                    className="btn-view-detail-editorial"
-                    onClick={() => setSelectedSpeaker(speaker)}
-                  >
-                    View Details
-                  </button>
-                </div>
+                <img
+                  src={speaker.svgAsset || '/assets/betawi/speaker-maudy.svg'}
+                  alt={speaker.name}
+                  className="speaker-maudy-svg-img"
+                />
               </div>
             ))}
           </div>
         </div>
+
+        {/* INTERACTIVE DETAIL POPUP MODAL (popup-speaker.svg) */}
+        {selectedSpeaker && (
+          <div
+            className="speaker-modal-backdrop"
+            onClick={() => setSelectedSpeaker(null)}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-speaker-name"
+          >
+            <div
+              className="speaker-popup-svg-wrapper"
+              onClick={(e) => e.stopPropagation()}
+              ref={modalRef}
+            >
+              {/* Popup Speaker SVG Asset */}
+              <img
+                src={selectedSpeaker.popupAsset || '/assets/betawi/popup-speaker.svg'}
+                alt={`Detail ${selectedSpeaker.name}`}
+                className="speaker-popup-svg-img"
+              />
+            </div>
+          </div>
+        )}
+
+        {/* Bottom gradient rectangle transition wrapper (rectangle-event1.svg in front of pager1) */}
+        <div className="event-sec2-bottom-rect-wrapper">
+          <img
+            src="/assets/betawi/rectangle-event1.svg"
+            alt="Bottom Rectangle"
+            className="event-sec2-bottom-rect"
+          />
+        </div>
       </section>
 
-      {/* ==================== INTERACTIVE PROFILE MODAL POPUP ==================== */}
-      {selectedSpeaker && (
-        <div className="speaker-modal-overlay" onClick={() => setSelectedSpeaker(null)}>
-          <div className="speaker-modal-card animate-fade-in" onClick={(e) => e.stopPropagation()}>
-            <button className="speaker-modal-close-btn" onClick={() => setSelectedSpeaker(null)}>
-              <X size={20} />
-            </button>
+      {/* ==========================================
+         SECTION 3A: VENUE - MAIN EVENT (Node 36:73)
+         ========================================== */}
+      <section id="event-venue-section" className="event-sec3a-venue">
+        {/* Background Image: Auditorium Photo */}
+        <img src="/assets/venue_bg_auditorium.png" alt="" className="sec3a-bg-img" />
 
-            <div className="modal-content-grid">
-              {/* Left Column: Photo */}
-              <div className="modal-photo-column">
-                <img 
-                  src={selectedSpeaker.image} 
-                  alt={selectedSpeaker.name} 
-                  className="modal-speaker-img" 
-                  style={{ borderColor: selectedSpeaker.color }}
+        {/* LOGO26 Watermarks (4 corners) */}
+        <img src="/assets/betawi/logo26_stroke.svg" alt="" className="sec3a-watermark sec3a-wm-tl" />
+        <img src="/assets/betawi/logo26_stroke.svg" alt="" className="sec3a-watermark sec3a-wm-tr" />
+        <img src="/assets/betawi/logo26_stroke.svg" alt="" className="sec3a-watermark sec3a-wm-bl" />
+        <img src="/assets/betawi/logo26_stroke.svg" alt="" className="sec3a-watermark sec3a-wm-br" />
+
+        {/* Bottom Gradient Overlay (transition to next section) */}
+        <div className="sec3a-bottom-gradient"></div>
+
+        <div className="event-sec3a-inner">
+          {/* Main Event Title SVG */}
+          <div className="sec-title-container">
+            <img
+              src="/assets/betawi/main-event.svg"
+              alt="Main Event"
+              className="main-event-title-svg"
+            />
+          </div>
+
+          <div className="main-event-content-row">
+            {/* Left: SVG Frame (perpus.svg) + Photo + Venue SVG Label */}
+            <div className="venue-photo-container">
+              <div className="venue-svg-frame-wrapper">
+                <img
+                  src="/assets/betawi/perpus.svg"
+                  alt="Perpustakaan Nasional"
+                  className="venue-bg-perpus-svg"
+                />
+              </div>
+              <div className="venue-name-pill-svg-wrapper">
+                <img
+                  src="/assets/betawi/button-perpus.svg"
+                  alt="Perpustakaan Nasional"
+                  className="venue-name-pill-svg"
+                />
+              </div>
+            </div>
+
+            {/* Right: Info Pill SVGs (Separated into 2 elements: Lokasi & Tanggal) */}
+            <div className="venue-info-pills-col">
+              <div className="venue-info-pill-svg-wrapper venue-info-pill-loc">
+                <div className="venue-pill-crop-box top-pill">
+                  <img
+                    src="/assets/betawi/button-lok-tgl.svg"
+                    alt="Auditorium 2nd floor"
+                    className="venue-info-pill-svg"
+                  />
+                </div>
+              </div>
+              <div className="venue-info-pill-svg-wrapper venue-info-pill-date">
+                <div className="venue-pill-crop-box bottom-pill">
+                  <img
+                    src="/assets/betawi/button-lok-tgl.svg"
+                    alt="21 November 2026"
+                    className="venue-info-pill-svg"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ==========================================
+         SECTION 3B: VENUE - FIND YOUR WAY (Figma Node 129:624)
+         ========================================== */}
+      <section id="event-sec3b-findway" className="event-sec3b-findway">
+        {/* Background Building Image */}
+        <img
+          src="/assets/perpusnas_building.png"
+          alt=""
+          className="sec3b-bg-building"
+        />
+        <div className="sec3b-bg-gradient-overlay"></div>
+
+        {/* LOGO26 Watermarks (4 corners) */}
+        <img src="/assets/betawi/logo26_stroke.svg" alt="" className="sec3b-watermark sec3b-wm-tl" />
+        <img src="/assets/betawi/logo26_stroke.svg" alt="" className="sec3b-watermark sec3b-wm-tr" />
+        <img src="/assets/betawi/logo26_stroke.svg" alt="" className="sec3b-watermark sec3b-wm-bl" />
+        <img src="/assets/betawi/logo26_stroke.svg" alt="" className="sec3b-watermark sec3b-wm-br" />
+
+        <div className="event-sec3b-inner">
+          {/* Section Title SVG: find-away.svg */}
+          <div className="sec-title-container">
+            <img
+              src="/assets/betawi/find-away.svg"
+              alt="Find Your Way!"
+              className="findway-title-svg"
+            />
+          </div>
+
+          <div className="findway-content-row">
+            {/* Left Column: Public Transport SVG & Parking Area SVG */}
+            <div className="findway-cards-col">
+              <div className="findway-card-svg-wrapper">
+                <img
+                  src="/assets/betawi/public-transport.svg"
+                  alt="Public Transport"
+                  className="findway-card-svg"
                 />
               </div>
 
-              {/* Right Column: Bio Details & Social Connect */}
-              <div className="modal-details-column">
-                <span className="modal-role-pill" style={{ backgroundColor: `${selectedSpeaker.color}15`, color: selectedSpeaker.color, borderColor: selectedSpeaker.color }}>
-                  {selectedSpeaker.role}
-                </span>
-                <h3 className="modal-speaker-name">{selectedSpeaker.name}</h3>
-                <p className="modal-talk-time">Session: {selectedSpeaker.time}</p>
-                
-                <h4 className="modal-talk-headline">"{selectedSpeaker.talk}"</h4>
-                
-                <div className="modal-bio-card">
-                  <p className="modal-bio-text">{selectedSpeaker.bio}</p>
-                </div>
-
-                <div className="modal-socials-row">
-                  <span className="connect-label">Connect:</span>
-                  <div className="socials-buttons">
-                    <a 
-                      href={selectedSpeaker.instagram} 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="social-btn instagram-btn"
-                      aria-label="Instagram Profile"
-                    >
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="mr-1 inline align-middle" style={{ marginTop: '-2px' }}>
-                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                      </svg> Instagram
-                    </a>
-                    <a 
-                      href={selectedSpeaker.linkedin} 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="social-btn linkedin-btn"
-                      aria-label="LinkedIn Profile"
-                    >
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="mr-1 inline align-middle" style={{ marginTop: '-2px' }}>
-                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                        <rect x="2" y="9" width="4" height="12"></rect>
-                        <circle cx="4" cy="4" r="2"></circle>
-                      </svg> LinkedIn
-                    </a>
-                  </div>
-                </div>
+              <div className="findway-card-svg-wrapper findway-parking-wrapper">
+                <img
+                  src="/assets/betawi/parking-area.svg"
+                  alt="Parking Area"
+                  className="findway-card-svg"
+                />
               </div>
             </div>
-          </div>
-        </div>
-      )}
 
-      {/* ==================== SECTION 3: MAIN EVENT ==================== */}
-      <section id="main-event" className="section event-section">
-        <div className="event-bg-decoration"></div>
-
-        <div className="section-container">
-
-          {/* Section Title Row */}
-          <div className="event-title-centered">
-            <h2 className="event-bento-title">Main Event</h2>
-          </div>
-
-          {/* Center Map Layout */}
-          <div className="event-center-map-layout">
-            <div className="center-map-wrapper">
-              {/* Decorative Elements */}
-              <div className="map-deco-circle"></div>
-              <div className="map-deco-dots"></div>
-
-              {/* The Map */}
-              <div className="center-map-frame">
+            {/* Right Column: Rectangle Maps Frame + Embed Map */}
+            <div className="findway-map-container">
+              <img
+                src="/assets/betawi/rectangle-maps.svg"
+                alt=""
+                className="findway-map-border-svg"
+              />
+              <div className="findway-map-inner-frame">
                 <iframe
-                  title="Lokasi TEDxUNJ"
-                  src="https://maps.google.com/maps?q=Universitas%20Negeri%20Jakarta&t=&z=16&ie=UTF8&iwloc=&output=embed"
-                  allowFullScreen
+                  title="Google Maps Location Perpustakaan Nasional RI"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.621255535974!2d106.82483867586717!3d-6.181419793806085!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f4326f54c93d%3A0x673e3bc2145b2f0a!2sNational%20Library%20of%20the%20Republic%20of%20Indonesia!5e0!3m2!1sen!2sid!4v1700000000000!5m2!1sen!2sid"
+                  style={{ border: 0, width: '100%', height: '100%' }}
                   loading="lazy"
+                  allowFullScreen
                   referrerPolicy="no-referrer-when-downgrade"
-                  className="center-map-iframe"
+                  className="findway-map-iframe"
                 ></iframe>
               </div>
-
-              {/* Tilted Footers (When & Where) */}
-              <div className="map-footers">
-                
-                {/* WHEN */}
-                <div className="tilted-footer footer-when">
-                  <div className="footer-label">WHEN</div>
-                  <div className="footer-content">
-                    <span className="footer-big-text">12 SEP 2026</span>
-                    <span className="footer-sub-text">Sabtu, 08:30 WIB</span>
-                  </div>
-                </div>
-
-                {/* WHERE */}
-                <div className="tilted-footer footer-where">
-                  <div className="footer-label">WHERE</div>
-                  <div className="footer-content">
-                    <span className="footer-big-text">Auditorium UNJ</span>
-                    <span className="footer-sub-text">Kampus A, Jakarta Timur</span>
-                  </div>
-                </div>
-
-              </div>
             </div>
+          </div>
+
+          {/* Footer Guideline Text SVG: final-vanue.svg */}
+          <div className="findway-footer-svg-wrapper">
+            <img
+              src="/assets/betawi/final-vanue.svg"
+              alt="Final venue details and access guidelines will be officially updated"
+              className="findway-footer-svg"
+            />
+          </div>
+        </div>
+
+        {/* Bottom Rectangle Banner: rectangle1.svg */}
+        <div className="countdown-bottom-rectangle-wrapper">
+          <img src="/assets/betawi/rectangle1.svg" alt="Bottom Rectangle" className="countdown-bottom-rectangle-svg" />
+        </div>
+      </section>
+
+      {/* ==========================================
+         SECTION 4: WHAT WILL YOU GET (Node 67:33)
+         ========================================== */}
+      <section id="event-benefits-section" className="event-sec4-benefits">
+        <img src="/assets/betawi/bg-menu.svg" alt="" className="sec4-bg-menu-svg" />
+
+        {/* Top Purple Frame Banner: rectangle-ungu.svg */}
+        <div className="sec4-top-rectangle-wrapper">
+          <img src="/assets/betawi/rectangle-ungu.svg" alt="" className="sec4-top-rectangle-svg" />
+        </div>
+
+        {/* Full Section Green Frame Banner: rectagnle-hijau.svg */}
+        <div className="sec4-hijau-rectangle-wrapper">
+          <img src="/assets/betawi/rectagnle-hijau.svg" alt="" className="sec4-hijau-rectangle-svg" />
+        </div>
+
+        {/* LOGO26 Watermarks (4 corners like Section 3A, with top-left and top-right customized) */}
+        <img src="/assets/betawi/logo26_stroke.svg" alt="" className="sec3a-watermark sec4-wm-tl" />
+        <img src="/assets/betawi/logo26_stroke.svg" alt="" className="sec3a-watermark sec4-wm-tr" />
+        <img src="/assets/betawi/logo26_stroke.svg" alt="" className="sec3a-watermark sec3a-wm-bl" />
+        <img src="/assets/betawi/logo26_stroke.svg" alt="" className="sec3a-watermark sec3a-wm-br" />
+
+        <div className="event-sec4-inner">
+          {/* Section Title Header SVG: what-get.svg */}
+          <div className="sec-title-container">
+            <img
+              src="/assets/betawi/what-get.svg"
+              alt="What will you get?"
+              className="sec4-title-svg"
+            />
+          </div>
+
+          {/* 7 Interactive Benefit Cards (Top Row: 4 cards, Bottom Row: 3 cards) */}
+          <div className="benefits-cards-wrapper">
+            {/* Top Row: 4 Cards */}
+            <div className="benefits-row benefits-row-top">
+              {benefitsData.slice(0, 4).map((item) => (
+                <div key={item.id} className="benefit-glass-card">
+                  <img src={item.image} alt={item.title} className="benefit-card-photo" />
+                  <div className="benefit-card-duotone-overlay"></div>
+                  <div className="benefit-card-gradient-vignette"></div>
+                  <div className="benefit-card-caption-container">
+                    <h3 className="benefit-card-title title-back" data-text={item.title}>
+                      {item.title}
+                    </h3>
+                    <h3 className="benefit-card-title title-front">
+                      {item.title}
+                    </h3>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Bottom Row: 3 Cards */}
+            <div className="benefits-row benefits-row-bottom">
+              {benefitsData.slice(4, 7).map((item) => (
+                <div key={item.id} className="benefit-glass-card">
+                  <img src={item.image} alt={item.title} className="benefit-card-photo" />
+                  <div className="benefit-card-duotone-overlay"></div>
+                  <div className="benefit-card-gradient-vignette"></div>
+                  <div className="benefit-card-caption-container">
+                    <h3 className="benefit-card-title title-back" data-text={item.title}>
+                      {item.title}
+                    </h3>
+                    <h3 className="benefit-card-title title-front">
+                      {item.title}
+                    </h3>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Rectangle Banner: rectangle1.svg */}
+        <div className="countdown-bottom-rectangle-wrapper">
+          <img src="/assets/betawi/rectangle1.svg" alt="Bottom Rectangle" className="countdown-bottom-rectangle-svg" />
+        </div>
+      </section>
+
+      {/* ==========================================
+         SECTION 5: TICKETING & BUNDLING (Node 138:391)
+         ========================================== */}
+      <section id="event-comingsoon-section" className="event-sec5-comingsoon">
+        {/* Background Batik Motif Layer (bg-event.svg) */}
+        <img
+          src="/assets/betawi/bg-event.svg"
+          alt="Event Hero Background Motif"
+          className="event-hero-batik-bg"
+        />
+
+        {/* Flanking Monas SVGs */}
+        <img
+          src="/assets/betawi/monas.svg"
+          alt="Monas Left"
+          className="event-monas event-monas--left"
+        />
+        <img
+          src="/assets/betawi/monas.svg"
+          alt="Monas Right"
+          className="event-monas event-monas--right"
+        />
+
+        {/* Top Gigi Balang Crown Trim Asset (balang-event.svg) */}
+        <img
+          src="/assets/betawi/balang-event.svg"
+          alt="Gigi Balang Crown Trim"
+          className="event-top-crown-svg"
+        />
+
+        {/* Bottom Flower & Fence Decoration Asset (bunga-hero.svg) */}
+        <img
+          src="/assets/betawi/bunga-hero.svg"
+          alt="Bunga Betawi Hero Decoration"
+          className="event-hero-flowers-svg"
+        />
+
+        <div className="event-sec1-inner sec5-inner-override">
+          {/* Section 5 Title SVG: ticketing-bundling.svg */}
+          <div className="sec-title-container sec5-title-container">
+            <img
+              src="/assets/betawi/ticketing-bundling.svg"
+              alt="Ticketing & Bundling"
+              className="sec5-title-svg"
+            />
+          </div>
+
+          {/* Section 5 Content SVG: comingsoon.svg */}
+          <div className="sec5-comingsoon-svg-wrapper">
+            <img
+              src="/assets/betawi/comingsoon.svg"
+              alt="Coming Soon"
+              className="sec5-comingsoon-svg"
+            />
           </div>
         </div>
       </section>
 
-      {/* ==================== SECTION 4: TICKET STORE SECTION ==================== */}
-      <section id="ticket-store-section" className="event-tickets-section section">
-        <div className="kawung-bg" style={{ opacity: 0.08 }}></div>
-        <div className="section-container">
-          <div className="event-section-title-wrapper text-center">
-            <h2 className="tickets-main-title section-title-giant">Get Your Ticket</h2>
+      {/* ==========================================
+         SECTION 6: STANDALONE EVENT FOOTER
+         ========================================== */}
+      <footer className="event-standalone-footer">
+        {/* Bottom Pink Fade Strip (rectangle.svg) */}
+        <img
+          src="/assets/betawi/rectangle.svg"
+          alt=""
+          className="contact-bottom-rectangle-strip"
+        />
+
+        <div className="footer-panel event-page-footer-card">
+          <div className="footer-panel-left">
+            <div className="footer-brand">
+              <span className="footer-brand-title">
+                <span className="brand-ted">TED<sup>x</sup></span> UNJ 5.0
+              </span>
+            </div>
+            <div className="footer-socials">
+              <img
+                src="/assets/betawi/icon-social.svg"
+                alt="Social Media Links"
+                className="footer-social-svg"
+              />
+            </div>
           </div>
 
-          <div className="tickets-grid">
-            {/* Single Ticket */}
-            <div className="ticket-card card-single-ticket">
-              <div className="ticket-card-badge">POPULAR</div>
-              <div className="ticket-card-header">
-                <h3 className="ticket-name">Single Ticket</h3>
-                <p className="ticket-description">{ticketTypes.single.desc}</p>
-              </div>
-              <div className="ticket-price-box">
-                <span className="currency">Rp</span>
-                <span className="price">75.000</span>
-                <span className="per">/ pax</span>
-              </div>
-              <div className="ticket-perks">
-                <ul>
-                  <li>✓ 1x Akses Masuk Utama</li>
-                  <li>✓ Goodie Bag Eksklusif</li>
-                  <li>✓ E-Certificate</li>
-                  <li>✓ Coffee Break & Lunch</li>
-                </ul>
-              </div>
-              <button 
-                className="btn-add-to-cart btn-single"
-                onClick={() => addToCart('single')}
-              >
-                <ShoppingCart size={16} className="mr-2 inline align-middle" /> Add to Cart
-              </button>
-            </div>
-
-            {/* Double Ticket */}
-            <div className="ticket-card card-double-ticket">
-              <div className="ticket-card-badge discount">10% OFF</div>
-              <div className="ticket-card-header">
-                <h3 className="ticket-name">Double Ticket</h3>
-                <p className="ticket-description">{ticketTypes.double.desc}</p>
-              </div>
-              <div className="ticket-price-box">
-                <span className="currency">Rp</span>
-                <span className="price">135.000</span>
-                <span className="per">/ 2 pax</span>
-              </div>
-              <div className="ticket-perks">
-                <ul>
-                  <li>✓ 2x Akses Masuk Utama</li>
-                  <li>✓ 2x Goodie Bag Eksklusif</li>
-                  <li>✓ 2x E-Certificate</li>
-                  <li>✓ 2x Coffee Break & Lunch</li>
-                </ul>
-              </div>
-              <button 
-                className="btn-add-to-cart btn-double"
-                onClick={() => addToCart('double')}
-              >
-                <ShoppingCart size={16} className="mr-2 inline align-middle" /> Add to Cart
-              </button>
-            </div>
-
-            {/* Triple Ticket */}
-            <div className="ticket-card card-triple-ticket">
-              <div className="ticket-card-badge discount">13% OFF</div>
-              <div className="ticket-card-header">
-                <h3 className="ticket-name">Triple Ticket</h3>
-                <p className="ticket-description">{ticketTypes.triple.desc}</p>
-              </div>
-              <div className="ticket-price-box">
-                <span className="currency">Rp</span>
-                <span className="price">195.000</span>
-                <span className="per">/ 3 pax</span>
-              </div>
-              <div className="ticket-perks">
-                <ul>
-                  <li>✓ 3x Akses Masuk Utama</li>
-                  <li>✓ 3x Goodie Bag Eksklusif</li>
-                  <li>✓ 3x E-Certificate</li>
-                  <li>✓ 3x Coffee Break & Lunch</li>
-                </ul>
-              </div>
-              <button 
-                className="btn-add-to-cart btn-triple"
-                onClick={() => addToCart('triple')}
-              >
-                <ShoppingCart size={16} className="mr-2 inline align-middle" /> Add to Cart
-              </button>
-            </div>
+          <div className="footer-legal">
+            <p className="legal-line">&copy;2025 All Rights Reserved</p>
+            <p className="legal-line">This independent TEDx event is operated</p>
+            <p className="legal-line">under license from TED</p>
           </div>
         </div>
-      </section>
+      </footer>
     </div>
   );
 }

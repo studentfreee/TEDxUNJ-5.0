@@ -1,0 +1,22 @@
+<svg width="317" height="318" viewBox="0 0 317 318" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_df_2_254)">
+<g clip-path="url(#paint0_diamond_2_254_clip_path)" data-figma-skip-parse="true"><g transform="matrix(0.0234409 0.110801 -0.115388 0.0244114 158.363 158.637)"><rect x="0" y="0" width="1223.8" height="1175.15" fill="url(#paint0_diamond_2_254)" opacity="1" shape-rendering="crispEdges"/><rect x="0" y="0" width="1223.8" height="1175.15" transform="scale(1 -1)" fill="url(#paint0_diamond_2_254)" opacity="1" shape-rendering="crispEdges"/><rect x="0" y="0" width="1223.8" height="1175.15" transform="scale(-1 1)" fill="url(#paint0_diamond_2_254)" opacity="1" shape-rendering="crispEdges"/><rect x="0" y="0" width="1223.8" height="1175.15" transform="scale(-1)" fill="url(#paint0_diamond_2_254)" opacity="1" shape-rendering="crispEdges"/></g></g><path d="M25.0158 189.393C121.323 148.447 131.58 127.026 127.166 25.0156C168.677 116.481 181.172 131.271 291.984 127.44C195.76 168.743 187.224 185.429 189.56 292.258C150.4 195.534 123.34 184.521 25.0158 189.393Z" data-figma-gradient-fill="{&#34;type&#34;:&#34;GRADIENT_DIAMOND&#34;,&#34;stops&#34;:[{&#34;color&#34;:{&#34;r&#34;:1.0,&#34;g&#34;:1.0,&#34;b&#34;:1.0,&#34;a&#34;:1.0},&#34;position&#34;:0.0},{&#34;color&#34;:{&#34;r&#34;:1.0,&#34;g&#34;:1.0,&#34;b&#34;:1.0,&#34;a&#34;:1.0},&#34;position&#34;:1.0}],&#34;stopsVar&#34;:[{&#34;color&#34;:{&#34;r&#34;:1.0,&#34;g&#34;:1.0,&#34;b&#34;:1.0,&#34;a&#34;:1.0},&#34;position&#34;:0.0},{&#34;color&#34;:{&#34;r&#34;:1.0,&#34;g&#34;:1.0,&#34;b&#34;:1.0,&#34;a&#34;:1.0},&#34;position&#34;:1.0}],&#34;transform&#34;:{&#34;m00&#34;:46.881717681884766,&#34;m01&#34;:-230.77606201171875,&#34;m02&#34;:250.31024169921875,&#34;m10&#34;:221.60124206542969,&#34;m11&#34;:48.822727203369141,&#34;m12&#34;:23.424724578857422},&#34;opacity&#34;:1.0,&#34;blendMode&#34;:&#34;NORMAL&#34;,&#34;visible&#34;:true}"/>
+</g>
+<defs>
+<filter id="filter0_df_2_254" x="0" y="0" width="317" height="317.273" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset/>
+<feGaussianBlur stdDeviation="12.5"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2_254"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_2_254" result="shape"/>
+<feGaussianBlur stdDeviation="8.45" result="effect2_foregroundBlur_2_254"/>
+</filter>
+<clipPath id="paint0_diamond_2_254_clip_path"><path d="M25.0158 189.393C121.323 148.447 131.58 127.026 127.166 25.0156C168.677 116.481 181.172 131.271 291.984 127.44C195.76 168.743 187.224 185.429 189.56 292.258C150.4 195.534 123.34 184.521 25.0158 189.393Z"/></clipPath><linearGradient id="paint0_diamond_2_254" x1="0" y1="0" x2="500" y2="500" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white"/>
+</linearGradient>
+</defs>
+</svg>

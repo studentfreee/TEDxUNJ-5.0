@@ -242,51 +242,89 @@ export default function App() {
 
   return (
     <>
-      {/* Header & Sticky Glassmorphism Navigation */}
-      <header className="header">
-        <div className="header-container">
-          {/* Left Side: Hamburger Menu Button */}
-          <div className="header-left">
-            <button
-              className="menu-trigger-btn"
-              onClick={() => setIsMenuOpen(true)}
-              aria-label="Buka Menu"
-            >
-              <Menu size={20} className="menu-icon-bars" />
-              <span className="menu-trigger-text">Menu</span>
-            </button>
-          </div>
-
-          {/* Center Side: Centered TEDxUNJ Logo */}
-          <div className="header-center">
-            <a
-              href="#"
-              className="logo logo-centered"
-              onClick={(e) => {
-                e.preventDefault();
-                navigate('/');
-                setActiveMenu('home');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
-            >
-              <span className="ted">TED<sup>x</sup></span><span className="unj">UNJ</span>
-            </a>
-          </div>
-
-          {/* Right Side: Interactive Shopping Cart */}
-          <div className="header-right">
-            <button
-              className={`cart-trigger-btn ${getCartTotalQty() > 0 ? 'has-items' : ''}`}
-              onClick={() => setIsCartOpen(true)}
-              aria-label="Keranjang Belanja"
-            >
-              <ShoppingCart size={20} />
-              {getCartTotalQty() > 0 && (
-                <span className="cart-badge-count">{getCartTotalQty()}</span>
-              )}
-            </button>
-          </div>
+      {/* Betawi Heritage Navbar (Figma Exact Layout) */}
+      <header className="betawi-header">
+        <div className="betawi-header-logo">
+          <a
+            href="/"
+            onClick={(e) => {
+              e.preventDefault();
+              navigate('/');
+              setActiveMenu('home');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+          >
+            <img src="/assets/betawi/tedx_logo.svg" alt="TEDxUNJ Logo" />
+          </a>
         </div>
+
+        <nav className="betawi-nav">
+          <a
+            href="/"
+            className={`betawi-nav-link ${location.pathname === '/' ? 'active' : ''}`}
+            onClick={(e) => {
+              e.preventDefault();
+              navigate('/');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+          >
+            HOME
+          </a>
+          <a
+            href="/partner"
+            className={`betawi-nav-link ${location.pathname === '/partner' ? 'active' : ''}`}
+            onClick={(e) => {
+              e.preventDefault();
+              navigate('/partner');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+          >
+            PARTNERS
+          </a>
+          <a
+            href="/event"
+            className={`betawi-nav-link ${location.pathname === '/event' ? 'active' : ''}`}
+            onClick={(e) => {
+              e.preventDefault();
+              navigate('/event');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+          >
+            EVENT
+          </a>
+          <a
+            href="/about"
+            className={`betawi-nav-link ${location.pathname === '/about' ? 'active' : ''}`}
+            onClick={(e) => {
+              e.preventDefault();
+              navigate('/about');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+          >
+            ABOUT <img src="/assets/betawi/dropdown_icon.svg" alt="v" style={{ width: 12, height: 12, marginLeft: 2 }} />
+          </a>
+
+          <button
+            className="betawi-cta-btn"
+            onClick={() => {
+              navigate('/event');
+              setTimeout(() => {
+                document.getElementById('ticket-store-section')?.scrollIntoView({ behavior: 'smooth' });
+              }, 100);
+            }}
+          >
+            RESERVE A PASS
+          </button>
+        </nav>
+
+        {/* Dedicated Mobile Hamburger Toggle Button */}
+        <button
+          className="betawi-mobile-hamburger"
+          onClick={() => setIsMenuOpen(true)}
+          aria-label="Open Mobile Menu"
+        >
+          <Menu size={26} color="#FFFFFF" />
+        </button>
       </header>
 
       {/* Main App */}
@@ -318,112 +356,112 @@ export default function App() {
         )}
       </main>
 
-      {/* Footer */}
-      <footer className="footer">
-        <div className="footer-container">
-          <div className="footer-logo">
-            <span className="ted">TED<sup>x</sup></span>UNJ
-          </div>
-          <div className="footer-copyright">
-            &copy; {new Date().getFullYear()} TEDxUNJ. This independent TEDx event is operated under license from TED. All rights reserved.
-          </div>
-        </div>
-      </footer>
 
-      {/* Navigation Slide Drawer */}
-      <div className={`menu-slide-drawer-overlay ${isMenuOpen ? 'open' : ''}`} onClick={() => setIsMenuOpen(false)}>
-        <div className="menu-slide-drawer" onClick={(e) => e.stopPropagation()}>
-          <div className="menu-drawer-header">
-            <div className="menu-drawer-logo-brand">
-              <span className="ted">TED<sup>x</sup></span>UNJ 5.0
+
+      {/* Floating Curved Glass Bottom Sheet (iOS / Awwwards Mobile Style) */}
+      <div
+        className={`betawi-bottom-sheet-overlay ${isMenuOpen ? 'open' : ''}`}
+        onClick={() => setIsMenuOpen(false)}
+      >
+        <div
+          className="betawi-bottom-sheet"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* Top Pill Handle */}
+          <div className="sheet-pill-handle"></div>
+
+          {/* Header Row */}
+          <div className="sheet-header">
+            <div className="sheet-brand">
+              <img src="/assets/betawi/tedx_logo.svg" alt="TEDxUNJ Logo" />
+              <span className="sheet-edition-badge">5.0</span>
             </div>
-            <button className="btn-close-drawer" onClick={() => setIsMenuOpen(false)} aria-label="Tutup Menu">
-              <X size={24} />
+            <button
+              className="sheet-close-btn"
+              onClick={() => setIsMenuOpen(false)}
+              aria-label="Tutup Menu"
+            >
+              <X size={18} color="#FFFFFF" />
             </button>
           </div>
 
-          <div className="menu-drawer-body">
-            <div className="menu-drawer-content-top">
-              <div className="menu-drawer-tagline">THE NEXT CHAPTER</div>
-              <nav className="menu-drawer-nav">
-                <a
-                  href="#hero"
-                  className={`menu-nav-link ${location.pathname === '/' && activeMenu === 'home' ? 'active' : ''}`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    navigate('/');
-                    setActiveMenu('home');
-                    setIsMenuOpen(false);
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                  }}
-                >
-                  <span className="link-text">Home</span>
-                </a>
-                <a
-                  href="#about"
-                  className={`menu-nav-link ${location.pathname === '/about' ? 'active' : ''}`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    navigate('/about');
-                    setActiveMenu('about');
-                    setIsMenuOpen(false);
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                  }}
-                >
-                  <span className="link-text">About</span>
-                </a>
-                <a
-                  href="/event"
-                  className={`menu-nav-link ${location.pathname === '/event' ? 'active' : ''}`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    navigate('/event');
-                    setActiveMenu('event');
-                    setIsMenuOpen(false);
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                  }}
-                >
-                  <span className="link-text">Event</span>
-                </a>
-                <a
-                  href="/partner"
-                  className={`menu-nav-link ${location.pathname === '/partner' ? 'active' : ''}`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    navigate('/partner');
-                    setActiveMenu('partner');
-                    setIsMenuOpen(false);
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                  }}
-                >
-                  <span className="link-text">Partner</span>
-                </a>
-              </nav>
-            </div>
+          {/* Nav Links Grid */}
+          <nav className="sheet-nav-list">
+            <a
+              href="/"
+              className={`sheet-nav-item ${location.pathname === '/' ? 'active' : ''}`}
+              onClick={(e) => {
+                e.preventDefault();
+                navigate('/');
+                setActiveMenu('home');
+                setIsMenuOpen(false);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+            >
+              <span className="item-text">HOME</span>
+              {location.pathname === '/' && <span className="item-dot"></span>}
+            </a>
 
-            <div className="menu-drawer-bottom-info">
-              <div className="info-item">
-                <span className="info-label">DATE</span>
-                <span className="info-value">September 12, 2026</span>
-              </div>
-              <div className="info-item">
-                <span className="info-label">VENUE</span>
-                <span className="info-value">Auditorium UNJ, Jakarta</span>
-              </div>
-              
-              <div className="socials-wrapper">
-                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="social-icon-btn" aria-label="Instagram">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-                </a>
-                <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="social-icon-btn" aria-label="YouTube">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
-                </a>
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="social-icon-btn" aria-label="LinkedIn">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-                </a>
-              </div>
-            </div>
-          </div>
+            <a
+              href="/partner"
+              className={`sheet-nav-item ${location.pathname === '/partner' ? 'active' : ''}`}
+              onClick={(e) => {
+                e.preventDefault();
+                navigate('/partner');
+                setActiveMenu('partner');
+                setIsMenuOpen(false);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+            >
+              <span className="item-text">PARTNERS</span>
+              {location.pathname === '/partner' && <span className="item-dot"></span>}
+            </a>
+
+            <a
+              href="/event"
+              className={`sheet-nav-item ${location.pathname === '/event' ? 'active' : ''}`}
+              onClick={(e) => {
+                e.preventDefault();
+                navigate('/event');
+                setActiveMenu('event');
+                setIsMenuOpen(false);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+            >
+              <span className="item-text">EVENT</span>
+              {location.pathname === '/event' && <span className="item-dot"></span>}
+            </a>
+
+            <a
+              href="/about"
+              className={`sheet-nav-item ${location.pathname === '/about' ? 'active' : ''}`}
+              onClick={(e) => {
+                e.preventDefault();
+                navigate('/about');
+                setActiveMenu('about');
+                setIsMenuOpen(false);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+            >
+              <span className="item-text">ABOUT</span>
+              {location.pathname === '/about' && <span className="item-dot"></span>}
+            </a>
+          </nav>
+
+          {/* CTA Reserve Pass Button */}
+          <button
+            className="sheet-cta-btn"
+            onClick={() => {
+              setIsMenuOpen(false);
+              navigate('/event');
+              setTimeout(() => {
+                document.getElementById('ticket-store-section')?.scrollIntoView({ behavior: 'smooth' });
+              }, 100);
+            }}
+          >
+            <span>RESERVE A PASS</span>
+            <ArrowRight size={18} />
+          </button>
         </div>
       </div>
 

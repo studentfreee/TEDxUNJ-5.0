@@ -1,73 +1,39 @@
-# React + TypeScript + Vite
+# 🔴 TEDxUNJ 5.0 - The Next Chapter
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Website resmi **TEDxUNJ 5.0: The Next Chapter** yang menyajikan visual kaya estetika Betawi Modern, interaktif, dan fully responsive di seluruh perangkat (Mobile, Tablet, Desktop).
 
-Currently, two official plugins are available:
+![TEDxUNJ 5.0](public/assets/betawi/logo-favicon.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🌟 Fitur Utama
+- **Hero Stage Betawi Modern**: Panggung pementasan budaya Betawi lengkap dengan ornamen Monas, Gigi Balang, Pagar Betawi, serta Maskot BAWI & Lambang X.
+- **Main Event & Speakers Grid**: Profil 6 pembicara inspiratif dengan popup modal detail interaktif.
+- **Find Your Way & Location Map**: Peta interaktif Perpustakaan Nasional RI dan informasi transportasi umum & area parkir.
+- **What Will You Get (Benefits)**: 7 kartu duotone glassmorphic interaktif yang responsif di seluruh viewport.
+- **Ticketing & Bundling**: Pilihan pass dengan sistem keranjang belanja & konfirmasi tiket otomatis.
+- **Full Responsiveness**: 100% responsif di layar mobile (<768px), tablet (<1024px), dan desktop (≥1280px).
 
-## React Compiler
+## 🛠️ Teknologi yang Digunakan
+- **React 18** + **TypeScript**
+- **Vite** (Akselerator build & HMR ultra cepat)
+- **Vanilla CSS** (Custom Design Tokens & Modern Glassmorphism System)
+- **Lucide React** (Ikonografi modern)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 Cara Menjalankan Secara Lokal
 
-## Expanding the ESLint configuration
+```bash
+# 1. Clone repository
+git clone https://github.com/studentfreee/TEDxUNJ-5.0.git
+cd TEDxUNJ-5.0
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+# 2. Install dependensi
+npm install
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# 3. Jalankan development server
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Buka browser di `http://localhost:5173`.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+© 2026 TEDxUNJ. Independent event operated under license from TED.
