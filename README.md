@@ -1,6 +1,6 @@
 # 🔴 TEDxUNJ 5.0 - The Next Chapter
 
-Website resmi **TEDxUNJ 5.0: The Next Chapter** yang menyajikan visual kaya estetika Betawi Modern, interaktif, dan fully responsive di seluruh perangkat (Mobile, Tablet, Desktop).
+Website resmi **TEDxUNJ 5.0: The Next Chapter** yang menyajikan visual kaya estetika Betawi Modern, interaktif, dan responsive.
 
 ![TEDxUNJ 5.0](public/assets/betawi/logo-favicon.png)
 
