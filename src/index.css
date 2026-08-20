@@ -11251,6 +11251,10 @@ h3 {
   pointer-events: none;
 }
 
+.visual-identity-section .countdown-bottom-rectangle-wrapper {
+  z-index: 5;
+}
+
 /* Monas Flanking Pillars (Left & Right) */
 .vi-monas {
   position: absolute;
