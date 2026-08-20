@@ -92,10 +92,12 @@ export default function VisualIdentitySection() {
                 </div>
               </div>
             ) : (
-              <video controls autoPlay className="vi-video-player">
-                <source src="/assets/betawi/video-visual-identity.webm" type="video/webm" />
-                Browser Anda tidak mendukung pemutaran video ini.
-              </video>
+              <video
+                src="/assets/betawi/video-visual-identity.mp4"
+                controls
+                autoPlay
+                className="vi-video-player"
+              />
             )}
           </div>
         </div>
