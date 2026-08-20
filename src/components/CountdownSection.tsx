@@ -61,9 +61,21 @@ export default function CountdownSection() {
   });
 
   useEffect(() => {
-    const targetTime = Date.now() + (90 * 24 * 60 * 60 * 1000);
+    // Target Event Date: November 21st at 09:00:00 WIB
+    const calculateTarget = () => {
+      const now = new Date();
+      let targetYear = now.getFullYear();
+      let eventDate = new Date(`${targetYear}-11-21T09:00:00+07:00`);
+      if (eventDate.getTime() <= now.getTime()) {
+        targetYear += 1;
+        eventDate = new Date(`${targetYear}-11-21T09:00:00+07:00`);
+      }
+      return eventDate.getTime();
+    };
 
-    const interval = setInterval(() => {
+    const targetTime = calculateTarget();
+
+    const updateTimer = () => {
       const now = Date.now();
       const diff = Math.max(0, targetTime - now);
 
@@ -73,7 +85,10 @@ export default function CountdownSection() {
       const s = Math.floor((diff % (1000 * 60)) / 1000);
 
       setTimeLeft({ days: d, hours: h, minutes: m, seconds: s });
-    }, 1000);
+    };
+
+    updateTimer();
+    const interval = setInterval(updateTimer, 1000);
 
     return () => clearInterval(interval);
   }, []);

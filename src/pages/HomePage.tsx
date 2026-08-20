@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import CountdownSection from '../components/CountdownSection';
+import TableOfContentsSection from '../components/TableOfContentsSection';
 import IntroduceSection from '../components/IntroduceSection';
 import PhilosophySection from '../components/PhilosophySection';
-import TableOfContentsSection from '../components/TableOfContentsSection';
+import VisualIdentitySection from '../components/VisualIdentitySection';
 import ContactFooterSection from '../components/ContactFooterSection';
 
 interface HomePageProps {
@@ -132,16 +133,19 @@ export default function HomePage({
       {/* ==================== SECTION 2: COUNTDOWN TIMER ==================== */}
       <CountdownSection />
 
-      {/* ==================== SECTION 3: INTRODUCE TEDxUNJ ==================== */}
-      <IntroduceSection />
-
-      {/* ==================== SECTION 4: PHILOSOPHY & THEME (FLIP BOOK) ==================== */}
-      <PhilosophySection />
-
-      {/* ==================== SECTION 5: TABLE OF CONTENTS (MENU SCROLL) ==================== */}
+      {/* ==================== SECTION 3: TABLE OF CONTENTS (MENU SCROLL) ==================== */}
       <TableOfContentsSection navigate={navigate} />
 
-      {/* ==================== SECTION 6: CONTACT & FOOTER COMBINED ==================== */}
+      {/* ==================== SECTION 4: INTRODUCE TEDxUNJ ==================== */}
+      <IntroduceSection />
+
+      {/* ==================== SECTION 5: PHILOSOPHY & THEME (FLIP BOOK) ==================== */}
+      <PhilosophySection />
+
+      {/* ==================== SECTION 6: VISUAL IDENTITY 'BETAWI CULTURE' ==================== */}
+      <VisualIdentitySection />
+
+      {/* ==================== SECTION 7: CONTACT & FOOTER COMBINED ==================== */}
       <ContactFooterSection />
     </div>
   );

@@ -37,6 +37,13 @@ export default function PhilosophySection() {
         />
       </div>
 
+      {/* Bottom Background Overlay SVG (bg-hijau-philosopy.svg) */}
+      <img
+        src="/assets/betawi/bg-hijau-philosopy.svg"
+        alt="Bottom Background Overlay"
+        className="philosophy-bottom-rectangle1-strip"
+      />
+
       {/* 2-Layer Responsive Container (1440x1024 Locked Viewport Height) */}
       <div className="philosophy-content">
         {/* Left & Right Header Floral Ornaments (STATIC - ALWAYS IN PLACE) */}

@@ -7728,8 +7728,32 @@ h3 {
   margin: 0;
 }
 
+.philosophy-bottom-rectangle1-strip {
+  display: none;
+}
+
 /* Philosophy Section Mobile Responsive Legibility (< 768px) */
 @media (max-width: 768px) {
+  .philosophy-bottom-rectangle1-strip {
+    display: block !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 120px !important;
+    object-fit: fill !important;
+    pointer-events: none !important;
+    z-index: 3 !important;
+  }
+
+  .badge-ted-logo {
+    height: clamp(12px, 3.5vw, 18px) !important;
+  }
+
+  .badge-presents-text {
+    font-size: clamp(13px, 3.8vw, 18px) !important;
+  }
+
   .philosophy-title-wrapper {
     width: clamp(300px, 85vw, 480px) !important;
   }
@@ -8812,18 +8836,26 @@ h3 {
     grid-template-columns: 1fr;
   }
 
+  /* Mobile Page Bottom Background Lock */
+  html,
+  body,
+  #root,
+  .tedx-landing-page {
+    background-color: #DE2A59 !important;
+  }
+
   /* ContactFooterSection Mobile (<767px) */
   .contact-section {
     height: auto !important;
     min-height: 100vh !important;
-    padding: 24px 16px 40px 16px !important;
-    background: linear-gradient(180deg, #FD8A2F 0%, #FDE9AC 18%, #DE2A59 50%, #900E2F 100%) !important;
-    background-color: #900E2F !important;
+    padding: 24px 16px 70px 16px !important;
+    background: linear-gradient(180deg, #FD8A2F 0%, #FDE9AC 18%, #DE2A59 100%) !important;
+    background-color: #DE2A59 !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     justify-content: flex-start !important;
-    overflow: hidden !important;
+    overflow: visible !important;
     position: relative !important;
   }
 
@@ -9420,6 +9452,43 @@ h3 {
   align-items: center;
 }
 
+/* Smooth Organic Keyframe Animations for Event Hero Cluster */
+@keyframes eventFloatMascot {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(1.2deg);
+  }
+}
+
+@keyframes eventFloatEmblem {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-14px) rotate(-1.5deg);
+  }
+}
+
+@keyframes eventFloatBubbleLeft {
+  0%, 100% {
+    transform: translateY(-76%) scale(1);
+  }
+  50% {
+    transform: translateY(calc(-76% - 10px)) scale(1.03);
+  }
+}
+
+@keyframes eventFloatBubbleRight {
+  0%, 100% {
+    transform: translateY(20%) scale(1);
+  }
+  50% {
+    transform: translateY(calc(20% - 10px)) scale(1.03);
+  }
+}
+
 /* Left Speech Bubble: bawi-teks.svg */
 .event-bawi-teks-speech {
   position: absolute;
@@ -9432,6 +9501,7 @@ h3 {
   z-index: 6;
   filter: drop-shadow(0px 10px 20px rgba(0, 0, 0, 0.25));
   pointer-events: none;
+  animation: eventFloatBubbleLeft 3.2s ease-in-out infinite;
 }
 
 /* Right Speech Bubble: logo-teks.svg */
@@ -9446,6 +9516,7 @@ h3 {
   z-index: 12;
   filter: drop-shadow(0px 10px 20px rgba(0, 0, 0, 0.25));
   pointer-events: none;
+  animation: eventFloatBubbleRight 3.6s ease-in-out infinite;
 }
 
 .event-mascot-bawi {
@@ -9453,6 +9524,7 @@ h3 {
   max-width: 380px;
   height: auto;
   filter: drop-shadow(0px 15px 30px rgba(0, 0, 0, 0.25));
+  animation: eventFloatMascot 4s ease-in-out infinite;
 }
 
 .event-x-emblem {
@@ -9460,6 +9532,7 @@ h3 {
   max-width: 330px;
   height: auto;
   filter: drop-shadow(0px 15px 30px rgba(0, 0, 0, 0.25));
+  animation: eventFloatEmblem 4.5s ease-in-out infinite;
 }
 
 .event-badge-svg-wrapper {
@@ -10870,23 +10943,27 @@ h3 {
     height: 150px !important;
   }
 
-  /* COMPONENT 4: Find Your Way Content Stacking */
+  /* COMPONENT 4: Find Your Way Content Stacking & Compact Section */
+  .event-sec3b-findway {
+    padding: 40px 16px 24px 16px !important;
+  }
+
   .findway-title-svg {
-    height: 60px !important;
+    height: 48px !important;
     width: auto !important;
   }
 
   .findway-content-row {
     flex-direction: column !important;
     align-items: center !important;
-    gap: 20px !important;
+    gap: 12px !important;
     width: 100% !important;
   }
 
   .findway-cards-col {
     width: 100% !important;
     align-items: center !important;
-    gap: 16px !important;
+    gap: 10px !important;
   }
 
   .findway-card-svg {
@@ -10896,13 +10973,28 @@ h3 {
   }
 
   .findway-map-container {
-    width: 85vw !important;
-    max-width: 360px !important;
-    height: 260px !important;
+    width: clamp(265px, 80vw, 370px) !important;
+    max-width: 100% !important;
+    aspect-ratio: 613 / 559 !important;
+    height: auto !important;
+    margin: 0 auto !important;
+  }
+
+  .findway-map-inner-frame {
+    top: 3.2% !important;
+    left: 3.2% !important;
+    width: 93.6% !important;
+    height: 93.6% !important;
+    border-radius: 16px !important;
+  }
+
+  .findway-footer-svg-wrapper {
+    margin-top: 10px !important;
   }
 
   .findway-footer-svg {
-    height: 45px !important;
+    height: 34px !important;
+    max-width: 86vw !important;
     width: auto !important;
   }
 
@@ -11067,7 +11159,8 @@ h3 {
   }
 
   .findway-map-container {
-    height: 240px !important;
+    height: auto !important;
+    aspect-ratio: 613 / 559 !important;
   }
 
   /* Section 5: Ticketing title & comingsoon mobile scale */
@@ -11083,5 +11176,349 @@ h3 {
   .event-bawi-teks-speech,
   .event-logo-teks-speech {
     display: none !important;
+  }
+}
+
+.visual-identity-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
+  max-height: 1080px;
+  padding: 85px 24px 30px 24px;
+  box-sizing: border-box;
+  background: linear-gradient(180deg, #C7C263 0%, #FDE9AC 46%, #FD8A2F 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  z-index: 5;
+}
+
+
+
+/* Top Left Corner Emblem Asset (logo_31.png) - symmetrical counterpart */
+.vi-top-left-emblem {
+  position: absolute;
+  top: -550px;
+  left: -580px;
+  width: clamp(650px, 60vw, 900px);
+  height: auto;
+  opacity: 0.4;
+  z-index: 5;
+  pointer-events: none;
+  transform: rotate(90deg);
+  filter: drop-shadow(0px 15px 30px rgba(0, 0, 0, 0.15));
+}
+
+/* Top Right Corner Emblem Asset (logo_31.png) - matching Section 4 'What Will You Get' top-right watermark */
+.vi-top-right-emblem {
+  position: absolute;
+  top: -550px;
+  right: -580px;
+  width: clamp(650px, 60vw, 900px);
+  height: auto;
+  opacity: 0.4;
+  z-index: 5;
+  pointer-events: none;
+  transform: scaleX(-1) rotate(90deg);
+  filter: drop-shadow(0px 15px 30px rgba(0, 0, 0, 0.15));
+}
+
+/* Bottom Left Watermark (logo26_stroke.svg) - 100% Opacity Solid Clear */
+.vi-wm-bl {
+  position: absolute;
+  top: 600px;
+  left: calc(50% - 960px - 380px);
+  width: 700px;
+  height: 745px;
+  transform: scaleX(-1);
+  opacity: 1;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Bottom Right Watermark (logo26_stroke.svg) - 100% Opacity Solid Clear */
+.vi-wm-br {
+  position: absolute;
+  top: 580px;
+  left: calc(50% - 960px + 1680px);
+  width: 700px;
+  height: 745px;
+  opacity: 1;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Monas Flanking Pillars (Left & Right) */
+.vi-monas {
+  position: absolute;
+  bottom: -35px;
+  height: clamp(520px, 88vh, 820px);
+  width: auto;
+  z-index: 4;
+  pointer-events: none;
+  filter: drop-shadow(0px 18px 30px rgba(0, 0, 0, 0.28));
+}
+
+.vi-monas--left {
+  left: -220px;
+}
+
+.vi-monas--right {
+  right: -220px;
+  transform: scaleX(-1);
+}
+
+.visual-identity-inner {
+  position: relative;
+  z-index: 6;
+  width: min(1360px, 94vw);
+  height: 100%;
+  max-height: calc(100vh - 70px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: clamp(12px, 2.2vh, 24px);
+  margin: 0 auto;
+}
+
+/* Title SVG Styling - Enlarged Desktop */
+.vi-title-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.vi-title-svg {
+  width: 100%;
+  max-width: min(960px, 86vw);
+  max-height: clamp(52px, 8.5vh, 85px);
+  height: auto;
+  display: block;
+}
+
+/* Video Stage Wrapper & Frame - Enlarged Desktop */
+.vi-video-stage-wrapper {
+  width: 100%;
+  max-width: min(880px, 64vw);
+  max-height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 1;
+}
+
+/* Cream Background Video Frame + Glowing Orange Border */
+.vi-video-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-height: 50vh;
+  border-radius: 25px;
+  padding: 5px;
+  background: linear-gradient(180deg, #FDE9AC 0%, #FFF3D6 100%);
+  border: 4px solid #FD8A2F;
+  box-shadow: 
+    0px 0px 40px rgba(253, 138, 47, 0.7), 
+    0px 22px 40px rgba(222, 42, 89, 0.4);
+  overflow: hidden;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  cursor: pointer;
+}
+
+.vi-video-frame:hover {
+  transform: translateY(-4px) scale(1.015);
+  box-shadow: 
+    0px 0px 50px rgba(253, 138, 47, 0.85), 
+    0px 28px 50px rgba(222, 42, 89, 0.5);
+}
+
+.vi-video-cream-poster {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  background: linear-gradient(180deg, #FDE9AC 0%, #F8D98C 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.vi-play-button-glow {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #DE2A59 0%, #FD8A2F 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 12px 30px rgba(222, 42, 89, 0.6);
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease;
+}
+
+.vi-video-cream-poster:hover .vi-play-button-glow {
+  transform: scale(1.15);
+  box-shadow: 0px 18px 40px rgba(222, 42, 89, 0.8);
+}
+
+.vi-play-icon {
+  margin-left: 4px;
+}
+
+.vi-video-iframe,
+.vi-video-player {
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  border: none;
+  display: block;
+  background: #000000;
+  object-fit: cover;
+}
+
+/* Description Text Card - Enlarged Desktop */
+.vi-description-card {
+  width: 100%;
+  max-width: min(1120px, 90vw);
+  text-align: center;
+  padding: 0 12px;
+  flex-shrink: 0;
+}
+
+.vi-description-text {
+  font-family: 'Source Serif 4', 'Source Serif Pro', Georgia, serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: clamp(16px, 1.65vw, 23px);
+  line-height: 1.5;
+  color: #DE2A59;
+  text-align: center;
+  margin: 0;
+  letter-spacing: -0.01em;
+  text-shadow: 0px 2px 10px rgba(255, 255, 255, 0.7);
+}
+
+/* Responsive Media Queries */
+@media (max-width: 1024px) {
+  .visual-identity-section {
+    min-height: auto;
+    padding: 80px 16px 80px 16px;
+  }
+  
+  .vi-description-text {
+    font-size: 20px;
+    line-height: 1.45;
+  }
+}
+
+@media (max-width: 768px) {
+  .visual-identity-section {
+    height: auto !important;
+    min-height: 500px !important;
+    max-height: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding-block: 60px 40px !important;
+    overflow: hidden;
+  }
+
+  .visual-identity-inner {
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    gap: 20px !important;
+    padding: 0 !important;
+  }
+
+  .vi-title-wrapper {
+    width: clamp(300px, 85vw, 480px) !important;
+    margin: 0 auto !important;
+  }
+
+  .vi-title-svg {
+    width: 100% !important;
+    max-width: 100% !important;
+    max-height: none !important;
+    height: auto !important;
+    transform: none !important;
+  }
+
+  .vi-video-stage-wrapper {
+    width: clamp(290px, 86vw, 420px) !important;
+    max-width: 100% !important;
+    max-height: none !important;
+    margin: 0 auto !important;
+  }
+
+  .vi-video-frame {
+    max-height: none !important;
+  }
+
+  .vi-monas {
+    height: 320px;
+    bottom: -20px;
+    opacity: 0.85;
+  }
+
+  .vi-monas--left {
+    left: -110px;
+  }
+
+  .vi-monas--right {
+    right: -110px;
+  }
+
+  .vi-top-left-emblem {
+    top: -195px;
+    left: -195px;
+    width: 330px;
+    opacity: 0.5;
+    transform: rotate(90deg);
+  }
+
+  .vi-top-right-emblem {
+    top: -195px;
+    right: -195px;
+    width: 330px;
+    opacity: 0.5;
+    transform: scaleX(-1) rotate(90deg);
+  }
+
+  .vi-wm-bl {
+    top: auto;
+    bottom: -80px;
+    left: -100px;
+    width: 300px;
+    height: auto;
+    transform: scaleX(-1);
+    opacity: 0.5;
+    z-index: 2;
+  }
+
+  .vi-wm-br {
+    top: auto;
+    bottom: -80px;
+    right: -100px;
+    left: auto;
+    width: 300px;
+    height: auto;
+    opacity: 0.5;
+    z-index: 2;
+  }
+
+  .vi-description-text {
+    font-size: 13.5px;
+    line-height: 1.45;
+  }
+  
+  .vi-title-text {
+    stroke-width: 12px !important;
   }
 }
