@@ -9674,7 +9674,7 @@ h3 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-top: 4cqh;
+  padding-top: 1cqh;
 }
 
 .event-sec2-title-wrapper {
@@ -9682,7 +9682,7 @@ h3 {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 3cqh;
+  margin-bottom: 1cqh;
 }
 
 .event-sec2-title-svg {
@@ -9701,7 +9701,7 @@ h3 {
   justify-items: center;
   align-items: center;
   z-index: 5;
-  margin-top: 1cqh;
+  margin-top: -2cqh;
 }
 
 .speaker-svg-card {
@@ -9726,9 +9726,21 @@ h3 {
   display: block;
 }
 
+.speaker-svg-card.no-popup {
+  cursor: default;
+}
+
+.speaker-svg-card.no-popup:hover {
+  transform: none;
+  filter: none;
+}
+
 .speaker-svg-card img[src*="speaker-ajeng.svg"],
 .speaker-svg-card img[src*="speaker-ayu.svg"],
-.speaker-svg-card img[src*="speaker-rossa.svg"] {
+.speaker-svg-card img[src*="speaker-rossa.svg"],
+.speaker-svg-card img[src*="speaker-faisal.svg"],
+.speaker-svg-card img[src*="to-be-anounced.svg"],
+.speaker-svg-card img[src*="to-be-anounced1.svg"] {
   transform: translateY(-9.5%);
 }
 
@@ -11126,10 +11138,19 @@ h3 {
 @media (max-width: 768px) {
 
   /* COMPONENT 2: Speakers Grid (Mobile: 2 Columns) */
+  .event-sec2-speakers {
+    padding: 45px 16px 30px 16px !important;
+  }
+
+  .event-sec2-title-wrapper {
+    margin-bottom: 8px !important;
+  }
+
   .speakers-window-grid-6 {
     grid-template-columns: repeat(2, 1fr) !important;
-    gap: 16px !important;
+    gap: 14px !important;
     max-width: 100% !important;
+    margin-top: -12px !important;
   }
 
   .speaker-maudy-svg-img {

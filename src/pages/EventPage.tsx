@@ -70,33 +70,33 @@ export default function EventPage({ addToCart: _addToCart, ticketTypes: _ticketT
       name: 'Dr. Muhammad Faisal',
       role: 'Youth Culture Specialist & Sociologist',
       photo: '/assets/bilgates.webp',
-      svgAsset: '/assets/betawi/speaker-maudy.svg',
-      popupAsset: '/assets/betawi/popup-speaker-ayu.svg',
+      svgAsset: '/assets/betawi/speaker-faisal.svg',
+      popupAsset: '/assets/betawi/popup-speaker-faisal.svg',
       talkTitle: 'Understanding Youth Dynamics & Social Evolution',
       time: '14:00 - 14:45 WIB',
       bio: 'Sociologist and youth culture specialist researching Indonesian generational evolution and social impact.'
     },
     {
       id: 'speaker-5',
-      name: 'Maudy Ayunda',
-      role: 'Educator, Musician & Advocate',
-      photo: '/assets/xaviera.jpeg',
-      svgAsset: '/assets/betawi/speaker-maudy.svg',
-      popupAsset: '/assets/betawi/popup-speaker-ayu.svg',
-      talkTitle: 'Unlocking Potential & Continuous Lifelong Learning',
+      name: 'To Be Announced',
+      role: 'To Be Announced',
+      photo: '',
+      svgAsset: '/assets/betawi/to-be-anounced.svg',
+      popupAsset: '',
+      talkTitle: 'To Be Announced',
       time: '15:00 - 15:45 WIB',
-      bio: 'Acclaimed educator, musician, and advocate for education and youth empowerment in Indonesia.'
+      bio: 'Speaker details will be announced soon.'
     },
     {
       id: 'speaker-6',
-      name: 'Maudy Ayunda',
-      role: 'Educator, Musician & Advocate',
-      photo: '/assets/timoty.jpg',
-      svgAsset: '/assets/betawi/speaker-maudy.svg',
-      popupAsset: '/assets/betawi/popup-speaker-ayu.svg',
-      talkTitle: 'The Next Chapter: Crafting Impactful Solutions',
+      name: 'To Be Announced',
+      role: 'To Be Announced',
+      photo: '',
+      svgAsset: '/assets/betawi/to-be-anounced1.svg',
+      popupAsset: '',
+      talkTitle: 'To Be Announced',
       time: '16:00 - 16:45 WIB',
-      bio: 'Acclaimed educator, musician, and advocate for education and youth empowerment in Indonesia.'
+      bio: 'Speaker details will be announced soon.'
     }
   ];
 
@@ -308,26 +308,33 @@ export default function EventPage({ addToCart: _addToCart, ticketTypes: _ticketT
 
           {/* 6 Speaker Window Frame SVG Grid (2 rows x 3 columns) */}
           <div className="speakers-window-grid-6">
-            {speakersData.map((speaker) => (
-              <div
-                key={speaker.id}
-                className="speaker-svg-card"
-                onClick={() => setSelectedSpeaker(speaker)}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    setSelectedSpeaker(speaker);
-                  }
-                }}
-              >
-                <img
-                  src={speaker.svgAsset || '/assets/betawi/speaker-maudy.svg'}
-                  alt={speaker.name}
-                  className="speaker-maudy-svg-img"
-                />
-              </div>
-            ))}
+            {speakersData.map((speaker) => {
+              const hasPopup = Boolean(speaker.popupAsset);
+              return (
+                <div
+                  key={speaker.id}
+                  className={`speaker-svg-card ${!hasPopup ? 'no-popup' : ''}`}
+                  onClick={() => {
+                    if (hasPopup) {
+                      setSelectedSpeaker(speaker);
+                    }
+                  }}
+                  role={hasPopup ? 'button' : 'article'}
+                  tabIndex={hasPopup ? 0 : -1}
+                  onKeyDown={(e) => {
+                    if (hasPopup && (e.key === 'Enter' || e.key === ' ')) {
+                      setSelectedSpeaker(speaker);
+                    }
+                  }}
+                >
+                  <img
+                    src={speaker.svgAsset || '/assets/betawi/speaker-maudy.svg'}
+                    alt={speaker.name}
+                    className="speaker-maudy-svg-img"
+                  />
+                </div>
+              );
+            })}
           </div>
         </div>
 
