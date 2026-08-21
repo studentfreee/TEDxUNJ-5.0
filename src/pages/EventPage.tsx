@@ -40,7 +40,7 @@ export default function EventPage({ addToCart: _addToCart, ticketTypes: _ticketT
       photo: '/assets/bilgates.webp',
       svgAsset: '/assets/betawi/speaker-ajeng.svg',
       popupAsset: '/assets/betawi/popup-speaker-ajeng.svg',
-      instagramUrl: 'https://www.instagram.com/ajeng.asmarandhany/',
+      instagramUrl: 'https://www.instagram.com/asmarandhany.talks',
       talkTitle: 'Empowering Next-Gen Learners in Digital Era',
       time: '09:30 - 10:15 WIB',
       bio: 'Prominent educational leader and speaker sharing inspiring insights on empowerment and youth development.'
@@ -52,7 +52,7 @@ export default function EventPage({ addToCart: _addToCart, ticketTypes: _ticketT
       photo: '/assets/xaviera.jpeg',
       svgAsset: '/assets/betawi/speaker-ayu.svg',
       popupAsset: '/assets/betawi/popup-speaker-ayu.svg',
-      instagramUrl: 'https://www.instagram.com/ayusaraherlia/',
+      instagramUrl: 'https://www.instagram.com/ayusarahinch',
       talkTitle: 'Bridging Cultural Horizons & Creative Media',
       time: '10:30 - 11:15 WIB',
       bio: 'Computer science scholar and content creator passionate about empowering youth to excel globally.'
@@ -76,7 +76,7 @@ export default function EventPage({ addToCart: _addToCart, ticketTypes: _ticketT
       photo: '/assets/bilgates.webp',
       svgAsset: '/assets/betawi/speaker-faisal.svg',
       popupAsset: '/assets/betawi/popup-speaker-faisal.svg',
-      instagramUrl: 'https://www.instagram.com/faisal_youth/',
+      instagramUrl: 'https://www.instagram.com/ketemufaisal',
       talkTitle: 'Understanding Youth Dynamics & Social Evolution',
       time: '14:00 - 14:45 WIB',
       bio: 'Sociologist and youth culture specialist researching Indonesian generational evolution and social impact.'
