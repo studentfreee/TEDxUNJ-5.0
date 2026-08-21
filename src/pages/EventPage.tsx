@@ -21,6 +21,7 @@ interface Speaker {
   photo: string;
   svgAsset?: string;
   popupAsset?: string;
+  instagramUrl?: string;
   bio: string;
   talkTitle: string;
   time: string;
@@ -39,6 +40,7 @@ export default function EventPage({ addToCart: _addToCart, ticketTypes: _ticketT
       photo: '/assets/bilgates.webp',
       svgAsset: '/assets/betawi/speaker-ajeng.svg',
       popupAsset: '/assets/betawi/popup-speaker-ajeng.svg',
+      instagramUrl: 'https://www.instagram.com/ajeng.asmarandhany/',
       talkTitle: 'Empowering Next-Gen Learners in Digital Era',
       time: '09:30 - 10:15 WIB',
       bio: 'Prominent educational leader and speaker sharing inspiring insights on empowerment and youth development.'
@@ -50,6 +52,7 @@ export default function EventPage({ addToCart: _addToCart, ticketTypes: _ticketT
       photo: '/assets/xaviera.jpeg',
       svgAsset: '/assets/betawi/speaker-ayu.svg',
       popupAsset: '/assets/betawi/popup-speaker-ayu.svg',
+      instagramUrl: 'https://www.instagram.com/ayusaraherlia/',
       talkTitle: 'Bridging Cultural Horizons & Creative Media',
       time: '10:30 - 11:15 WIB',
       bio: 'Computer science scholar and content creator passionate about empowering youth to excel globally.'
@@ -61,6 +64,7 @@ export default function EventPage({ addToCart: _addToCart, ticketTypes: _ticketT
       photo: '/assets/timoty.jpg',
       svgAsset: '/assets/betawi/speaker-rossa.svg',
       popupAsset: '/assets/betawi/popup-speaker-rossa.svg',
+      instagramUrl: 'https://www.instagram.com/rossafarahdiba/',
       talkTitle: 'Redefining Wealth & Creative Economies for Gen Z',
       time: '13:00 - 13:45 WIB',
       bio: 'Leading creative entrepreneur fostering financial literacy and career acceleration for young generations.'
@@ -72,6 +76,7 @@ export default function EventPage({ addToCart: _addToCart, ticketTypes: _ticketT
       photo: '/assets/bilgates.webp',
       svgAsset: '/assets/betawi/speaker-faisal.svg',
       popupAsset: '/assets/betawi/popup-speaker-faisal.svg',
+      instagramUrl: 'https://www.instagram.com/faisal_youth/',
       talkTitle: 'Understanding Youth Dynamics & Social Evolution',
       time: '14:00 - 14:45 WIB',
       bio: 'Sociologist and youth culture specialist researching Indonesian generational evolution and social impact.'
@@ -352,12 +357,28 @@ export default function EventPage({ addToCart: _addToCart, ticketTypes: _ticketT
               onClick={(e) => e.stopPropagation()}
               ref={modalRef}
             >
-              {/* Popup Speaker SVG Asset */}
-              <img
-                src={selectedSpeaker.popupAsset || '/assets/betawi/popup-speaker.svg'}
-                alt={`Detail ${selectedSpeaker.name}`}
-                className="speaker-popup-svg-img"
-              />
+              <div className="speaker-popup-content-box">
+                {/* Popup Speaker SVG Asset */}
+                <img
+                  src={selectedSpeaker.popupAsset || '/assets/betawi/popup-speaker.svg'}
+                  alt={`Detail ${selectedSpeaker.name}`}
+                  className="speaker-popup-svg-img"
+                />
+
+                {/* Clickable Instagram Link Overlay */}
+                {selectedSpeaker.instagramUrl && (
+                  <a
+                    href={selectedSpeaker.instagramUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="speaker-popup-ig-link"
+                    title={`Instagram ${selectedSpeaker.name}`}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <span className="sr-only">Instagram {selectedSpeaker.name}</span>
+                  </a>
+                )}
+              </div>
             </div>
           </div>
         )}

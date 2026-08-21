@@ -9860,6 +9860,14 @@ h3 {
   }
 }
 
+.speaker-popup-content-box {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: auto;
+  max-height: 85vh;
+}
+
 .speaker-popup-svg-img {
   width: 100%;
   height: auto;
@@ -9867,6 +9875,43 @@ h3 {
   object-fit: contain;
   border-radius: 30px;
   filter: drop-shadow(0px 25px 60px rgba(0, 0, 0, 0.45));
+  display: block;
+}
+
+.speaker-popup-ig-link {
+  position: absolute;
+  left: 10.45%;
+  top: 77.69%;
+  width: 23.55%;
+  height: 7.48%;
+  border-radius: 26px;
+  z-index: 10;
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.speaker-popup-ig-link:hover {
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+  transform: scale(1.03);
+}
+
+.speaker-popup-ig-link:active {
+  transform: scale(0.98);
+}
+
+/* Screen-reader accessibility utility */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
 }
 
 .speaker-popup-close-btn {
