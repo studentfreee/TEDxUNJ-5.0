@@ -6916,12 +6916,12 @@ h3 {
   }
 
   .hero-svg-welcome {
-    width: 48% !important;
+    width: 35% !important;
     left: 50% !important;
   }
 
   .hero-svg-welcome.is-open {
-    top: 62.5% !important;
+    top: 63.5% !important;
   }
 
   .hero-svg-chapter {
