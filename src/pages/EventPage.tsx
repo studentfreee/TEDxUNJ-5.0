@@ -6,7 +6,8 @@ import {
   Camera,
   Music,
   Gift,
-  Armchair
+  Armchair,
+  X
 } from 'lucide-react';
 
 interface EventPageProps {
@@ -28,9 +29,113 @@ interface Speaker {
 }
 
 export default function EventPage({ addToCart: _addToCart, ticketTypes: _ticketTypes }: EventPageProps) {
+  // Feature Flag: Set VITE_ENABLE_CHECKOUT=true in .env to enable the checkout popup flow.
+  // Defaults to false for safe Production deployment (Option C: visual banner only).
+  const ENABLE_CHECKOUT_POPUP = import.meta.env.VITE_ENABLE_CHECKOUT === 'true';
+
   const [selectedSpeaker, setSelectedSpeaker] = useState<Speaker | null>(null);
   const modalRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  // Pre-Sale Modal State & Form Handlers
+  const [isPreSaleModalOpen, setIsPreSaleModalOpen] = useState(false);
+  const [quantity, setQuantity] = useState(1);
+  const [formData, setFormData] = useState({
+    nama: '',
+    email: '',
+    kuliah: '',
+    phone: ''
+  });
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [formErrors, setFormErrors] = useState<Record<string, string>>({});
+
+  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    if (formErrors[name]) {
+      setFormErrors((prev) => ({ ...prev, [name]: '' }));
+    }
+  };
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const errors: Record<string, string> = {};
+    if (!formData.nama.trim()) errors.nama = 'Nama lengkap wajib diisi';
+    if (!formData.email.trim()) {
+      errors.email = 'Email wajib diisi';
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      errors.email = 'Format email tidak valid';
+    }
+    if (!formData.phone.trim()) errors.phone = 'Nomor WhatsApp wajib diisi';
+
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+      return;
+    }
+
+    try {
+      setIsSubmitting(true);
+      const res = await fetch('/api/create-payment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          nama: formData.nama,
+          email: formData.email,
+          phone: formData.phone,
+          quantity: quantity,
+          totalPrice: totalPrice,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (data.token) {
+        if ((window as any).snap) {
+          (window as any).snap.pay(data.token, {
+            onSuccess: (result: any) => {
+              console.log('Payment success:', result);
+              setFormSubmitted(true);
+            },
+            onPending: (result: any) => {
+              console.log('Payment pending:', result);
+              setFormSubmitted(true);
+            },
+            onError: (result: any) => {
+              console.error('Payment error:', result);
+              alert('Pembayaran gagal atau terjadi kesalahan.');
+            },
+            onClose: () => {
+              console.log('Snap popup closed by user');
+            },
+          });
+        } else if (data.redirect_url) {
+          window.location.href = data.redirect_url;
+        }
+      } else {
+        alert('Gagal mendapatkan token transaksi Midtrans: ' + (data.error?.message || 'Terjadi kesalahan'));
+      }
+    } catch (err) {
+      console.error('Submit error:', err);
+      alert('Gagal menghubungkan ke server pembayaran.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleClosePreSaleModal = () => {
+    setIsPreSaleModalOpen(false);
+    setTimeout(() => {
+      setFormSubmitted(false);
+      setQuantity(1);
+      setFormData({ nama: '', email: '', kuliah: '', phone: '' });
+      setFormErrors({});
+    }, 300);
+  };
+
+  const totalPrice = quantity * 72000;
+  const formattedTotal = new Intl.NumberFormat('id-ID').format(totalPrice);
 
   const speakersData: Speaker[] = [
     {
@@ -666,21 +771,42 @@ export default function EventPage({ addToCart: _addToCart, ticketTypes: _ticketT
         />
 
         <div className="event-sec1-inner sec5-inner-override">
-          {/* Section 5 Title SVG: ticketing-bundling.svg */}
+          {/* Section 5 Title SVG: grab-ticket.svg */}
           <div className="sec-title-container sec5-title-container">
             <img
-              src="/assets/betawi/ticketing-bundling.svg"
-              alt="Ticketing & Bundling"
+              src="/assets/betawi/grab-ticket.svg"
+              alt="Grab Ticket"
               className="sec5-title-svg"
             />
           </div>
 
-          {/* Section 5 Content SVG: comingsoon.svg */}
-          <div className="sec5-comingsoon-svg-wrapper">
+          {/* Section 5 Ticket Prices SVG: harga-ticket.svg with Interactive Pre-Sale Hotspot */}
+          <div className="sec5-comingsoon-svg-wrapper interactive-ticket-wrapper">
             <img
-              src="/assets/betawi/comingsoon.svg"
-              alt="Coming Soon"
+              src="/assets/betawi/harga-ticket.svg"
+              alt="Harga Ticket"
               className="sec5-comingsoon-svg"
+            />
+            {/* Clickable Pre-Sale Hotspot Overlay (Active only when ENABLE_CHECKOUT_POPUP is true) */}
+            {ENABLE_CHECKOUT_POPUP && (
+              <button
+                type="button"
+                className="presale-hotspot-btn"
+                onClick={() => {
+                  setFormSubmitted(false);
+                  setIsPreSaleModalOpen(true);
+                }}
+                aria-label="Pesan Tiket Pre-Sale"
+              />
+            )}
+          </div>
+
+          {/* Section 5 Secure Seat SVG: secure-set.svg (Static Banner) */}
+          <div className="sec5-secureset-svg-wrapper">
+            <img
+              src="/assets/betawi/secure-set.svg"
+              alt="Secure Your Seat"
+              className="sec5-secureset-svg"
             />
           </div>
         </div>
@@ -720,6 +846,176 @@ export default function EventPage({ addToCart: _addToCart, ticketTypes: _ticketT
           </div>
         </div>
       </footer>
+
+      {/* ==========================================
+         INTERACTIVE TICKET POPUP MODAL (popup-ticket.svg)
+         ========================================== */}
+      {ENABLE_CHECKOUT_POPUP && isPreSaleModalOpen && (
+        <div
+          className="ticket-modal-backdrop"
+          onClick={handleClosePreSaleModal}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="ticket-modal-title"
+        >
+          <div
+            className={`ticket-popup-svg-wrapper ${formSubmitted ? 'success-mode' : ''}`}
+            onClick={(e) => e.stopPropagation()}
+            ref={modalRef}
+            style={{
+              aspectRatio: formSubmitted ? '1070 / 568' : '923 / 772',
+              maxWidth: formSubmitted ? '900px' : '840px',
+            }}
+          >
+            {/* Close Button on Ticket Order Form */}
+            {!formSubmitted && (
+              <button
+                type="button"
+                className="ticket-popup-close-btn"
+                onClick={handleClosePreSaleModal}
+                aria-label="Tutup Modal"
+              >
+                <X size={24} />
+              </button>
+            )}
+
+            {/* Popup Ticket SVG Frame Asset */}
+            <img
+              src={formSubmitted ? '/assets/betawi/popup-success.svg' : '/assets/betawi/popup-new.svg'}
+              alt={formSubmitted ? 'Payment Successful!' : 'Popup Ticket Order Form'}
+              className="ticket-popup-svg-img"
+            />
+
+            {!formSubmitted ? (
+              /* Form overlay inputs mapped directly to popup-ticket.svg slots */
+              <form onSubmit={handleFormSubmit} className="ticket-popup-form-overlay">
+                {/* Slot 1: Full Name */}
+                <input
+                  id="input-fullname"
+                  type="text"
+                  name="nama"
+                  value={formData.nama}
+                  onChange={handleFormChange}
+                  placeholder="Masukkan Nama Lengkap Anda"
+                  className={`ticket-slot-input slot-fullname ${formErrors.nama ? 'slot-error' : ''}`}
+                />
+
+                {/* Slot 2: Email Address */}
+                <input
+                  id="input-email"
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleFormChange}
+                  placeholder="contoh@email.com"
+                  className={`ticket-slot-input slot-email ${formErrors.email ? 'slot-error' : ''}`}
+                />
+
+                {/* Slot 3: Phone Number */}
+                <input
+                  id="input-phone"
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleFormChange}
+                  placeholder="081234567890"
+                  className={`ticket-slot-input slot-phone ${formErrors.phone ? 'slot-error' : ''}`}
+                />
+
+                {/* Slot 4: Interactive Quantity Dropdown */}
+                <select
+                  id="input-quantity"
+                  value={quantity}
+                  onChange={(e) => setQuantity(Number(e.target.value))}
+                  className="ticket-slot-input slot-quantity"
+                  title="Pilih Jumlah Tiket"
+                >
+                  <option value={1}>1 Ticket</option>
+                  <option value={2}>2 Tickets</option>
+                  <option value={3}>3 Tickets</option>
+                  <option value={4}>4 Tickets</option>
+                  <option value={5}>5 Tickets</option>
+                  <option value={6}>6 Tickets</option>
+                  <option value={7}>7 Tickets</option>
+                  <option value={8}>8 Tickets</option>
+                  <option value={9}>9 Tickets</option>
+                  <option value={10}>10 Tickets</option>
+                </select>
+
+                {/* Dynamic Total Price Box Overlay with Inline SVG Component */}
+                <div className="ticket-summary-total-overlay">
+                  <svg
+                    width="100%"
+                    height="100%"
+                    viewBox="0 0 491 75"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="ticket-total-inline-svg"
+                  >
+                    <defs>
+                      {/* Figma Drop Shadow Filter node 474:227 */}
+                      <filter
+                        id="figma_drop_shadow_474_227"
+                        x="-30%"
+                        y="-30%"
+                        width="160%"
+                        height="160%"
+                        colorInterpolationFilters="sRGB"
+                      >
+                        <feFlood floodOpacity="0" result="BackgroundImageFix" />
+                        <feColorMatrix
+                          type="matrix"
+                          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+                        />
+                        <feOffset dx="-4.07867" dy="8.15733" />
+                        <feGaussianBlur stdDeviation="2.03933" />
+                        <feComposite in2="BackgroundImageFix" operator="in" />
+                        <feBlend
+                          mode="normal"
+                          in="SourceGraphic"
+                          in2="effect1_dropShadow"
+                          result="shape"
+                        />
+                      </filter>
+
+                      {/* Figma Linear Gradient #DE2F5A to #FDA22F */}
+                      <linearGradient
+                        id="figma_gradient_474_227"
+                        x1="0%"
+                        y1="0%"
+                        x2="100%"
+                        y2="0%"
+                      >
+                        <stop offset="0%" stopColor="#DE2F5A" />
+                        <stop offset="99.99%" stopColor="#FDA22F" />
+                      </linearGradient>
+                    </defs>
+
+                    <g transform="translate(245.5, 37.5)">
+                      <text
+                        x="0"
+                        y="0"
+                        className="svg-dynamic-total-text"
+                      >
+                        Total : Rp. {formattedTotal}
+                      </text>
+                    </g>
+                  </svg>
+                </div>
+
+                {/* Clickable Overlay over Pay Now Button */}
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="ticket-slot-pay-btn"
+                  title={isSubmitting ? 'Memproses Pembayaran...' : 'Klik untuk Lanjutkan Pembayaran'}
+                  aria-label="Pay Now!"
+                />
+              </form>
+            ) : null}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

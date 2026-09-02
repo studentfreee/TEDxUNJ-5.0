@@ -23,6 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 
-# Agent Skills
-.agents
-skills-lock.json
+# Local Scratch
+scratch
+.env
+.env*.local
