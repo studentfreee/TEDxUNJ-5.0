@@ -8,18 +8,25 @@ export default function TableOfContentsSection({ navigate }: TableOfContentsSect
   const [isOpen, setIsOpen] = useState(false);
 
   const menuItems = [
-    { num: '01', title: 'Introduce', targetId: 'introduce' },
-    { num: '02', title: 'Our Theme', targetId: 'philosophy' },
-    { num: '03', title: 'Event', targetId: 'introduce', path: '/event' },
-    { num: '04', title: 'Merch', targetId: 'introduce', path: '/event' },
-    { num: '05', title: 'Ticket', targetId: 'introduce', path: '/event' },
-    { num: '06', title: 'Partnership', targetId: 'contact', path: '/partner' }
+    { num: '01', title: 'Introduction & Theme', targetId: 'introduce' },
+    { num: '02', title: 'Speakers & Venue', targetId: 'event-speakers-section', path: '/event' },
+    { num: '03', title: 'Exclusive Merchandise', targetId: 'event-benefits-section', path: '/event' },
+    { num: '04', title: 'Ticketing', targetId: 'event-comingsoon-section', path: '/event' },
+    { num: '05', title: 'Inside TEDx', targetId: 'app', path: '/about' }
   ];
 
   const handleMenuClick = (e: React.MouseEvent, item: typeof menuItems[0]) => {
     e.stopPropagation();
     if (item.path && navigate) {
       navigate(item.path);
+      setTimeout(() => {
+        const el = document.getElementById(item.targetId);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        } else {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      }, 150);
     } else {
       const el = document.getElementById(item.targetId);
       if (el) {

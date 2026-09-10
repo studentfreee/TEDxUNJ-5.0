@@ -27,3 +27,7 @@ dist-ssr
 scratch
 .env
 .env*.local
+
+# Qwen Code and test results
+.qwen/
+test-results/

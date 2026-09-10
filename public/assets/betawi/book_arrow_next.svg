@@ -1,0 +1,19 @@
+<svg width="898" height="227" viewBox="0 0 898 227" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="paint_spine_arrow" x1="0" y1="113.5" x2="898" y2="113.5" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#DC143C"/>
+      <stop offset="100%" stop-color="#FFC0CB"/>
+    </linearGradient>
+    <linearGradient id="paint_spine_gloss" x1="0" y1="20" x2="0" y2="113" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.08"/>
+    </linearGradient>
+    <clipPath id="arrow_pill_clip">
+      <path d="M747.991 21.0542C747.991 3.11945 769.013 -6.57245 782.652 5.07414L890.632 97.2841C900.456 105.673 900.456 120.856 890.632 129.244L782.652 221.454C769.013 233.101 747.991 223.409 747.991 205.474V158.116H34.022C15.2322 158.116 3.54594e-07 142.884 0 124.094V102.08C0 83.2904 15.2322 68.0582 34.022 68.0582H747.991V21.0542Z"/>
+    </clipPath>
+  </defs>
+  <path d="M747.991 21.0542C747.991 3.11945 769.013 -6.57245 782.652 5.07414L890.632 97.2841C900.456 105.673 900.456 120.856 890.632 129.244L782.652 221.454C769.013 233.101 747.991 223.409 747.991 205.474V158.116H34.022C15.2322 158.116 3.54594e-07 142.884 0 124.094V102.08C0 83.2904 15.2322 68.0582 34.022 68.0582H747.991V21.0542Z" fill="url(#paint_spine_arrow)"/>
+  <g clip-path="url(#arrow_pill_clip)">
+    <rect x="0" y="0" width="898" height="113.5" fill="url(#paint_spine_gloss)"/>
+  </g>
+</svg>

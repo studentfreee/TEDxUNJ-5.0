@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface NumberSvgProps {
   num: string;
@@ -53,6 +54,7 @@ function ColonDots() {
 }
 
 export default function CountdownSection() {
+  const navigate = useNavigate();
   const [timeLeft, setTimeLeft] = useState({
     days: 90,
     hours: 23,
@@ -174,6 +176,33 @@ export default function CountdownSection() {
             alt="Every second brings us closer to the TEDxUNJ Main Event ...."
             className="countdown-subcaption-svg"
           />
+        </div>
+
+        {/* Get Ticket Button */}
+        <div className="countdown-get-ticket-wrapper">
+          <button
+            className="countdown-get-ticket-btn"
+            onClick={() => {
+              navigate('/event');
+              setTimeout(() => {
+                const el = document.getElementById('event-comingsoon-section');
+                if (el) {
+                  el.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+              }, 150);
+            }}
+            aria-label="Get Ticket - Buy TEDxUNJ 5.0 Tickets"
+            type="button"
+          >
+            <img
+              src="/assets/betawi/get-ticket.svg"
+              alt="Get Ticket"
+              className="countdown-get-ticket-svg"
+              draggable={false}
+            />
+          </button>
         </div>
       </div>
 

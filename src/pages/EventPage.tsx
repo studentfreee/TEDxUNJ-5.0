@@ -9,6 +9,7 @@ import {
   Armchair,
   X
 } from 'lucide-react';
+import MerchSection from '../components/MerchSection';
 
 interface EventPageProps {
   addToCart?: (type: 'single' | 'double' | 'triple') => void;
@@ -732,6 +733,11 @@ export default function EventPage({ addToCart: _addToCart, ticketTypes: _ticketT
           <img src="/assets/betawi/rectangle1.svg" alt="Bottom Rectangle" className="countdown-bottom-rectangle-svg" />
         </div>
       </section>
+
+      {/* ==========================================
+         SECTION 4.5: EXCLUSIVE MERCHANDISE (Node 337:57)
+         ========================================== */}
+      <MerchSection />
 
       {/* ==========================================
          SECTION 5: TICKETING & BUNDLING (Node 138:391)

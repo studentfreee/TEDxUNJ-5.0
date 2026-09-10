@@ -13,7 +13,6 @@ import {
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import EventPage from './pages/EventPage';
-import PartnerPage from './pages/PartnerPage';
 
 export default function App() {
   const navigate = useNavigate();
@@ -95,40 +94,6 @@ export default function App() {
   const getCartTotalPrice = () => {
     return cartItems.reduce((acc, item) => acc + (item.price * item.qty), 0);
   };
-
-  // Scroll-triggered visibility for comparison cards in Section A
-  const [cardsVisible, setCardsVisible] = useState(false);
-  const cardsRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    // Reset visibility state on route changes
-    if (location.pathname !== '/about') {
-      setCardsVisible(false);
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setCardsVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.15 }
-    );
-
-    // Timeout fallback to ensure visibility if observer fails
-    const timer = setTimeout(() => {
-      if (cardsRef.current) {
-        observer.observe(cardsRef.current);
-      }
-    }, 100);
-
-    return () => {
-      clearTimeout(timer);
-      observer.disconnect();
-    };
-  }, [location.pathname]);
 
   // Handle Scroll to animate Hero scattering & highlight sticky header links
   useEffect(() => {
@@ -267,17 +232,6 @@ export default function App() {
             HOME
           </a>
           <a
-            href="/partner"
-            className={`betawi-nav-link ${location.pathname === '/partner' ? 'active' : ''}`}
-            onClick={(e) => {
-              e.preventDefault();
-              navigate('/partner');
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
-          >
-            PARTNERS
-          </a>
-          <a
             href="/event"
             className={`betawi-nav-link ${location.pathname === '/event' ? 'active' : ''}`}
             onClick={(e) => {
@@ -305,7 +259,7 @@ export default function App() {
             onClick={() => {
               navigate('/event');
               setTimeout(() => {
-                document.getElementById('ticket-store-section')?.scrollIntoView({ behavior: 'smooth' });
+                document.getElementById('event-comingsoon-section')?.scrollIntoView({ behavior: 'smooth' });
               }, 100);
             }}
           >
@@ -328,20 +282,7 @@ export default function App() {
         {location.pathname === '/event' ? (
           <EventPage addToCart={addToCart} ticketTypes={ticketTypes} />
         ) : location.pathname === '/about' ? (
-          <AboutPage
-            cardsRef={cardsRef}
-            cardsVisible={cardsVisible}
-            setSelectedEdition={setSelectedEdition}
-            activeEdition={activeEdition}
-            prevEdition={prevEdition}
-            nextEdition={nextEdition}
-            activeVideoId={activeVideoId}
-            setActiveVideoId={setActiveVideoId}
-            youtubeVideos={youtubeVideos}
-            handleHeroMouseMove={handleHeroMouseMove}
-          />
-        ) : location.pathname === '/partner' ? (
-          <PartnerPage />
+          <AboutPage />
         ) : (
           <HomePage
             scrollProgress={scrollProgress}
@@ -399,21 +340,6 @@ export default function App() {
             </a>
 
             <a
-              href="/partner"
-              className={`sheet-nav-item ${location.pathname === '/partner' ? 'active' : ''}`}
-              onClick={(e) => {
-                e.preventDefault();
-                navigate('/partner');
-                setActiveMenu('partner');
-                setIsMenuOpen(false);
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
-            >
-              <span className="item-text">PARTNERS</span>
-              {location.pathname === '/partner' && <span className="item-dot"></span>}
-            </a>
-
-            <a
               href="/event"
               className={`sheet-nav-item ${location.pathname === '/event' ? 'active' : ''}`}
               onClick={(e) => {
@@ -451,7 +377,7 @@ export default function App() {
               setIsMenuOpen(false);
               navigate('/event');
               setTimeout(() => {
-                document.getElementById('ticket-store-section')?.scrollIntoView({ behavior: 'smooth' });
+                document.getElementById('event-comingsoon-section')?.scrollIntoView({ behavior: 'smooth' });
               }, 100);
             }}
           >
@@ -483,7 +409,7 @@ export default function App() {
                   setIsCartOpen(false);
                   navigate('/event');
                   setTimeout(() => {
-                    document.getElementById('ticket-store-section')?.scrollIntoView({ behavior: 'smooth' });
+                    document.getElementById('event-comingsoon-section')?.scrollIntoView({ behavior: 'smooth' });
                   }, 100);
                 }}>
                   Pilih Tiket

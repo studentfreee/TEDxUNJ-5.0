@@ -103,11 +103,48 @@ export default function ContactFooterSection() {
               </span>
             </div>
             <div className="footer-socials">
-              <img
-                src="/assets/betawi/icon-social.svg"
-                alt="Social Media Links"
-                className="footer-social-svg"
-              />
+              <a
+                href="https://www.instagram.com/tedxunj"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-social-link"
+                aria-label="Instagram"
+              >
+                <img
+                  src="/assets/betawi/social-instagram.svg"
+                  alt=""
+                  aria-hidden="true"
+                  className="footer-social-icon"
+                />
+              </a>
+              <a
+                href="https://www.tiktok.com/@tedxunj"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-social-link"
+                aria-label="TikTok"
+              >
+                <img
+                  src="/assets/betawi/social-tiktok.svg"
+                  alt=""
+                  aria-hidden="true"
+                  className="footer-social-icon"
+                />
+              </a>
+              <a
+                href="https://www.linkedin.com/company/tedxunj"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-social-link"
+                aria-label="LinkedIn"
+              >
+                <img
+                  src="/assets/betawi/social-linkedin.svg"
+                  alt=""
+                  aria-hidden="true"
+                  className="footer-social-icon"
+                />
+              </a>
             </div>
           </div>
 

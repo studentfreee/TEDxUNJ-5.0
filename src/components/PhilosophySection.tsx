@@ -141,6 +141,41 @@ export default function PhilosophySection() {
           </div>
         </div>
 
+        {/* ==================== INTERACTIVE BOOK NAVIGATION ARROWS (OUTSIDE stage to avoid z-index/overflow issues) ==================== */}
+        {bookState === 1 && (
+          <button
+            type="button"
+            className="philosophy-book-nav-btn btn-next"
+            onClick={() => setBookState(2)}
+            aria-label="Next Chapter: Grow"
+            title="Halaman Selanjutnya"
+          >
+            <img
+              src="/assets/betawi/book_arrow_next.svg"
+              alt=""
+              aria-hidden="true"
+              className="philosophy-arrow-svg"
+            />
+          </button>
+        )}
+
+        {bookState === 2 && (
+          <button
+            type="button"
+            className="philosophy-book-nav-btn btn-prev"
+            onClick={() => setBookState(1)}
+            aria-label="Previous Chapter: Learn & Create"
+            title="Halaman Sebelumnya"
+          >
+            <img
+              src="/assets/betawi/book_arrow_next.svg"
+              alt=""
+              aria-hidden="true"
+              className="philosophy-arrow-svg arrow-prev"
+            />
+          </button>
+        )}
+
         {/* ==================== BOTTOM ELEMENTS (FADE OUT WHEN BOOK IS OPEN) ==================== */}
         <div className={`philosophy-bottom-group ${bookState !== 0 ? 'is-hidden' : ''}`}>
           {/* Bottom Subheading: "Every generation has its own chapter." */}
