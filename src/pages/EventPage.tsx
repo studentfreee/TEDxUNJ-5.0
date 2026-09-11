@@ -34,6 +34,10 @@ export default function EventPage({ addToCart: _addToCart, ticketTypes: _ticketT
   // Defaults to false for safe Production deployment (Option C: visual banner only).
   const ENABLE_CHECKOUT_POPUP = import.meta.env.VITE_ENABLE_CHECKOUT === 'true';
 
+  // Feature Flag: Set to true when speaker lineup is ready to be published.
+  // Defaults to false to temporarily hide Section 2 (Speakers) without affecting other sections.
+  const ENABLE_SPEAKERS_SECTION = false;
+
   const [selectedSpeaker, setSelectedSpeaker] = useState<Speaker | null>(null);
   const modalRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
@@ -360,144 +364,146 @@ export default function EventPage({ addToCart: _addToCart, ticketTypes: _ticketT
       {/* ==========================================
          SECTION 2: SPEAKER LIST + POPUP DETAIL (Node 96:2107 + 96:2330)
          ========================================== */}
-      <section id="event-speakers-section" className="event-sec2-speakers">
-        {/* Dedicated Bottom Betawi Pager Row Layer (pager1.svg - 24 units) */}
-        <div className="event-sec2-pager-row">
-          {Array.from({ length: 24 }).map((_, idx) => (
+      {ENABLE_SPEAKERS_SECTION && (
+        <section id="event-speakers-section" className="event-sec2-speakers">
+          {/* Dedicated Bottom Betawi Pager Row Layer (pager1.svg - 24 units) */}
+          <div className="event-sec2-pager-row">
+            {Array.from({ length: 24 }).map((_, idx) => (
+              <img
+                key={idx}
+                src="/assets/betawi/pager1.svg"
+                alt="Betawi Pagar"
+                className="event-sec2-pager-unit"
+              />
+            ))}
+          </div>
+
+          {/* Top Left Watermark: countdown_logo_watermark.svg */}
+          <div className="countdown-top-left-watermark">
+            <img src="/assets/betawi/countdown_logo_watermark.svg" alt="Countdown Logo Watermark Left" className="top-left-watermark-img" />
+          </div>
+
+          {/* Top Right Watermark: countdown_logo_watermark.svg (mirrored) */}
+          <div className="countdown-top-right-watermark">
+            <img src="/assets/betawi/countdown_logo_watermark.svg" alt="Countdown Logo Watermark Right" className="top-right-watermark-img" />
+          </div>
+
+          {/* Background Floral Pattern Tiles Layer */}
+          <div className="event-sec2-floral-pattern">
             <img
-              key={idx}
-              src="/assets/betawi/pager1.svg"
-              alt="Betawi Pagar"
-              className="event-sec2-pager-unit"
+              src="/assets/betawi/floral_pattern.png"
+              alt="Floral Pattern Background"
+              className="event-floral-tile"
             />
-          ))}
-        </div>
-
-        {/* Top Left Watermark: countdown_logo_watermark.svg */}
-        <div className="countdown-top-left-watermark">
-          <img src="/assets/betawi/countdown_logo_watermark.svg" alt="Countdown Logo Watermark Left" className="top-left-watermark-img" />
-        </div>
-
-        {/* Top Right Watermark: countdown_logo_watermark.svg (mirrored) */}
-        <div className="countdown-top-right-watermark">
-          <img src="/assets/betawi/countdown_logo_watermark.svg" alt="Countdown Logo Watermark Right" className="top-right-watermark-img" />
-        </div>
-
-        {/* Background Floral Pattern Tiles Layer */}
-        <div className="event-sec2-floral-pattern">
-          <img
-            src="/assets/betawi/floral_pattern.png"
-            alt="Floral Pattern Background"
-            className="event-floral-tile"
-          />
-          <img
-            src="/assets/betawi/floral_pattern.png"
-            alt="Floral Pattern Background"
-            className="event-floral-tile"
-          />
-          <img
-            src="/assets/betawi/floral_pattern.png"
-            alt="Floral Pattern Background"
-            className="event-floral-tile"
-          />
-          <img
-            src="/assets/betawi/floral_pattern.png"
-            alt="Floral Pattern Background"
-            className="event-floral-tile"
-          />
-        </div>
-
-        <div className="event-sec2-inner">
-          {/* Section Title SVG: "meet-speaker.svg" */}
-          <div className="event-sec2-title-wrapper">
             <img
-              src="/assets/betawi/meet-speaker.svg"
-              alt="Meet Our Speakers!"
-              className="event-sec2-title-svg"
+              src="/assets/betawi/floral_pattern.png"
+              alt="Floral Pattern Background"
+              className="event-floral-tile"
+            />
+            <img
+              src="/assets/betawi/floral_pattern.png"
+              alt="Floral Pattern Background"
+              className="event-floral-tile"
+            />
+            <img
+              src="/assets/betawi/floral_pattern.png"
+              alt="Floral Pattern Background"
+              className="event-floral-tile"
             />
           </div>
 
-          {/* 6 Speaker Window Frame SVG Grid (2 rows x 3 columns) */}
-          <div className="speakers-window-grid-6">
-            {speakersData.map((speaker) => {
-              const hasPopup = Boolean(speaker.popupAsset);
-              return (
-                <div
-                  key={speaker.id}
-                  className={`speaker-svg-card ${!hasPopup ? 'no-popup' : ''}`}
-                  onClick={() => {
-                    if (hasPopup) {
-                      setSelectedSpeaker(speaker);
-                    }
-                  }}
-                  role={hasPopup ? 'button' : 'article'}
-                  tabIndex={hasPopup ? 0 : -1}
-                  onKeyDown={(e) => {
-                    if (hasPopup && (e.key === 'Enter' || e.key === ' ')) {
-                      setSelectedSpeaker(speaker);
-                    }
-                  }}
-                >
-                  <img
-                    src={speaker.svgAsset || '/assets/betawi/speaker-maudy.svg'}
-                    alt={speaker.name}
-                    className="speaker-maudy-svg-img"
-                  />
-                </div>
-              );
-            })}
-          </div>
-        </div>
+          <div className="event-sec2-inner">
+            {/* Section Title SVG: "meet-speaker.svg" */}
+            <div className="event-sec2-title-wrapper">
+              <img
+                src="/assets/betawi/meet-speaker.svg"
+                alt="Meet Our Speakers!"
+                className="event-sec2-title-svg"
+              />
+            </div>
 
-        {/* INTERACTIVE DETAIL POPUP MODAL (popup-speaker.svg) */}
-        {selectedSpeaker && (
-          <div
-            className="speaker-modal-backdrop"
-            onClick={() => setSelectedSpeaker(null)}
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="modal-speaker-name"
-          >
-            <div
-              className="speaker-popup-svg-wrapper"
-              onClick={(e) => e.stopPropagation()}
-              ref={modalRef}
-            >
-              <div className="speaker-popup-content-box">
-                {/* Popup Speaker SVG Asset */}
-                <img
-                  src={selectedSpeaker.popupAsset || '/assets/betawi/popup-speaker.svg'}
-                  alt={`Detail ${selectedSpeaker.name}`}
-                  className="speaker-popup-svg-img"
-                />
-
-                {/* Clickable Instagram Link Overlay */}
-                {selectedSpeaker.instagramUrl && (
-                  <a
-                    href={selectedSpeaker.instagramUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="speaker-popup-ig-link"
-                    title={`Instagram ${selectedSpeaker.name}`}
-                    onClick={(e) => e.stopPropagation()}
+            {/* 6 Speaker Window Frame SVG Grid (2 rows x 3 columns) */}
+            <div className="speakers-window-grid-6">
+              {speakersData.map((speaker) => {
+                const hasPopup = Boolean(speaker.popupAsset);
+                return (
+                  <div
+                    key={speaker.id}
+                    className={`speaker-svg-card ${!hasPopup ? 'no-popup' : ''}`}
+                    onClick={() => {
+                      if (hasPopup) {
+                        setSelectedSpeaker(speaker);
+                      }
+                    }}
+                    role={hasPopup ? 'button' : 'article'}
+                    tabIndex={hasPopup ? 0 : -1}
+                    onKeyDown={(e) => {
+                      if (hasPopup && (e.key === 'Enter' || e.key === ' ')) {
+                        setSelectedSpeaker(speaker);
+                      }
+                    }}
                   >
-                    <span className="sr-only">Instagram {selectedSpeaker.name}</span>
-                  </a>
-                )}
-              </div>
+                    <img
+                      src={speaker.svgAsset || '/assets/betawi/speaker-maudy.svg'}
+                      alt={speaker.name}
+                      className="speaker-maudy-svg-img"
+                    />
+                  </div>
+                );
+              })}
             </div>
           </div>
-        )}
 
-        {/* Bottom gradient rectangle transition wrapper (rectangle-event1.svg in front of pager1) */}
-        <div className="event-sec2-bottom-rect-wrapper">
-          <img
-            src="/assets/betawi/rectangle-event1.svg"
-            alt="Bottom Rectangle"
-            className="event-sec2-bottom-rect"
-          />
-        </div>
-      </section>
+          {/* INTERACTIVE DETAIL POPUP MODAL (popup-speaker.svg) */}
+          {selectedSpeaker && (
+            <div
+              className="speaker-modal-backdrop"
+              onClick={() => setSelectedSpeaker(null)}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="modal-speaker-name"
+            >
+              <div
+                className="speaker-popup-svg-wrapper"
+                onClick={(e) => e.stopPropagation()}
+                ref={modalRef}
+              >
+                <div className="speaker-popup-content-box">
+                  {/* Popup Speaker SVG Asset */}
+                  <img
+                    src={selectedSpeaker.popupAsset || '/assets/betawi/popup-speaker.svg'}
+                    alt={`Detail ${selectedSpeaker.name}`}
+                    className="speaker-popup-svg-img"
+                  />
+
+                  {/* Clickable Instagram Link Overlay */}
+                  {selectedSpeaker.instagramUrl && (
+                    <a
+                      href={selectedSpeaker.instagramUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="speaker-popup-ig-link"
+                      title={`Instagram ${selectedSpeaker.name}`}
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <span className="sr-only">Instagram {selectedSpeaker.name}</span>
+                    </a>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Bottom gradient rectangle transition wrapper (rectangle-event1.svg in front of pager1) */}
+          <div className="event-sec2-bottom-rect-wrapper">
+            <img
+              src="/assets/betawi/rectangle-event1.svg"
+              alt="Bottom Rectangle"
+              className="event-sec2-bottom-rect"
+            />
+          </div>
+        </section>
+      )}
 
       {/* ==========================================
          SECTION 3A: VENUE - MAIN EVENT (Node 36:73)

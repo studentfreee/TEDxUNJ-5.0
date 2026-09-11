@@ -20,7 +20,10 @@ export default function TableOfContentsSection({ navigate }: TableOfContentsSect
     if (item.path && navigate) {
       navigate(item.path);
       setTimeout(() => {
-        const el = document.getElementById(item.targetId);
+        let el = document.getElementById(item.targetId);
+        if (!el && item.targetId === 'event-speakers-section') {
+          el = document.getElementById('event-venue-section');
+        }
         if (el) {
           el.scrollIntoView({ behavior: 'smooth' });
         } else {
@@ -28,7 +31,10 @@ export default function TableOfContentsSection({ navigate }: TableOfContentsSect
         }
       }, 150);
     } else {
-      const el = document.getElementById(item.targetId);
+      let el = document.getElementById(item.targetId);
+      if (!el && item.targetId === 'event-speakers-section') {
+        el = document.getElementById('event-venue-section');
+      }
       if (el) {
         el.scrollIntoView({ behavior: 'smooth' });
       }
