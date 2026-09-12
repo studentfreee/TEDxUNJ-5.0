@@ -12088,20 +12088,19 @@ h3 {
   -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 87%);
 }
 
-/* Background layer from Figma (IMG_9720 2, Node #383:108) inside Mask Group */
+/* Background layer from Figma (bg.png) inside Mask Group */
 .journey-bg-img,
 .img-9720-2,
 #img-9720-2 {
   position: absolute;
-  top: -23px;
+  top: 0;
   left: 50%;
-  transform: translateX(-50%) rotate(1.151deg);
-  width: max(100%, 99.438rem);
+  transform: translateX(-50%);
+  width: 100%;
   min-width: 100%;
-  height: 74.56488rem;
-  aspect-ratio: 1591.01 / 1193.04;
-  opacity: 0.53;
-  background: url('/journey/IMG_9720_2.jpg') lightgray center -1.097px / cover no-repeat;
+  height: 100%;
+  opacity: 0.9;
+  background: url('/assets/betawi/bg.png') center top / cover no-repeat;
   pointer-events: none;
   user-select: none;
 }
