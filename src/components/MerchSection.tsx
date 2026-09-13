@@ -43,7 +43,6 @@ export default function MerchSection() {
           target="_blank"
           rel="noopener noreferrer"
           className="merch-buyme-link"
-          title="Buy TEDxUNJ Merchandise (Google Form)"
           aria-label="Buy TEDxUNJ Merchandise (Google Form)"
         >
           <span className="sr-only">Buy Merchandise</span>
@@ -55,7 +54,7 @@ export default function MerchSection() {
           target="_blank"
           rel="noopener noreferrer"
           className="merch-card-buy-link card-1"
-          title="Buy Merch Item 1"
+          aria-label="Buy Merch Item 1"
         >
           <span className="sr-only">Buy Item 1</span>
         </a>
@@ -64,7 +63,7 @@ export default function MerchSection() {
           target="_blank"
           rel="noopener noreferrer"
           className="merch-card-buy-link card-2"
-          title="Buy Merch Item 2"
+          aria-label="Buy Merch Item 2"
         >
           <span className="sr-only">Buy Item 2</span>
         </a>
@@ -73,7 +72,7 @@ export default function MerchSection() {
           target="_blank"
           rel="noopener noreferrer"
           className="merch-card-buy-link card-3"
-          title="Buy Merch Item 3"
+          aria-label="Buy Merch Item 3"
         >
           <span className="sr-only">Buy Item 3</span>
         </a>
@@ -82,7 +81,7 @@ export default function MerchSection() {
           target="_blank"
           rel="noopener noreferrer"
           className="merch-card-buy-link card-4"
-          title="Buy Merch Item 4"
+          aria-label="Buy Merch Item 4"
         >
           <span className="sr-only">Buy Item 4</span>
         </a>
@@ -91,7 +90,7 @@ export default function MerchSection() {
           target="_blank"
           rel="noopener noreferrer"
           className="merch-card-buy-link card-5"
-          title="Buy Merch Item 5"
+          aria-label="Buy Merch Item 5"
         >
           <span className="sr-only">Buy Item 5</span>
         </a>
