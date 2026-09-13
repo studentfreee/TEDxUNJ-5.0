@@ -757,15 +757,13 @@ export default function EventPage({ addToCart: _addToCart, ticketTypes: _ticketT
               alt="Harga Ticket"
               className="sec5-comingsoon-svg"
             />
-            {/* Clickable Pre-Sale Hotspot Overlay (Opens Ticket Popup Form) */}
-            <button
-              type="button"
+            {/* Clickable Pre-Sale Hotspot — langsung ke Google Form */}
+            <a
+              href={EARLY_BIRD_FORM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="presale-hotspot-btn"
-              onClick={() => {
-                setFormSubmitted(false);
-                setIsPreSaleModalOpen(true);
-              }}
-              aria-label="Pesan Tiket Pre-Sale"
+              aria-label="Pesan Tiket Pre-Sale (Google Form)"
             />
           </div>
 
@@ -818,7 +816,7 @@ export default function EventPage({ addToCart: _addToCart, ticketTypes: _ticketT
       {/* ==========================================
          INTERACTIVE TICKET POPUP MODAL (popup-ticket.svg)
          ========================================== */}
-      {isPreSaleModalOpen && (
+      {ENABLE_CHECKOUT_POPUP && isPreSaleModalOpen && (
         <div
           className="ticket-modal-backdrop"
           onClick={handleClosePreSaleModal}
