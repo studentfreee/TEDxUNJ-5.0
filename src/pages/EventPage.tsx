@@ -66,7 +66,7 @@ export default function EventPage({ addToCart: _addToCart, ticketTypes: _ticketT
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleFormSubmit = async (e: React.FormEvent) => {
+  const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const errors: Record<string, string> = {};
     if (!formData.nama.trim()) errors.nama = 'Nama lengkap wajib diisi';
@@ -82,53 +82,9 @@ export default function EventPage({ addToCart: _addToCart, ticketTypes: _ticketT
       return;
     }
 
-    try {
-      setIsSubmitting(true);
-      const res = await fetch('/api/create-payment', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          nama: formData.nama,
-          email: formData.email,
-          phone: formData.phone,
-          quantity: quantity,
-          totalPrice: totalPrice,
-        }),
-      });
-
-      const data = await res.json();
-
-      if (data.token) {
-        if ((window as any).snap) {
-          (window as any).snap.pay(data.token, {
-            onSuccess: (result: any) => {
-              console.log('Payment success:', result);
-              setFormSubmitted(true);
-            },
-            onPending: (result: any) => {
-              console.log('Payment pending:', result);
-              setFormSubmitted(true);
-            },
-            onError: (result: any) => {
-              console.error('Payment error:', result);
-              alert('Pembayaran gagal atau terjadi kesalahan.');
-            },
-            onClose: () => {
-              console.log('Snap popup closed by user');
-            },
-          });
-        } else if (data.redirect_url) {
-          window.location.href = data.redirect_url;
-        }
-      } else {
-        alert('Gagal mendapatkan token transaksi Midtrans: ' + (data.error?.message || 'Terjadi kesalahan'));
-      }
-    } catch (err) {
-      console.error('Submit error:', err);
-      alert('Gagal menghubungkan ke server pembayaran.');
-    } finally {
-      setIsSubmitting(false);
-    }
+    // Redirect to Google Form instead of Midtrans
+    window.open(EARLY_BIRD_FORM_URL, '_blank', 'noopener,noreferrer');
+    setFormSubmitted(true);
   };
 
   const handleClosePreSaleModal = () => {
@@ -801,16 +757,16 @@ export default function EventPage({ addToCart: _addToCart, ticketTypes: _ticketT
               alt="Harga Ticket"
               className="sec5-comingsoon-svg"
             />
-            {/* Clickable Early Bird / Pre-Sale Hotspot Overlay (Opens Google Form) */}
-            <a
-              href={EARLY_BIRD_FORM_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+            {/* Clickable Pre-Sale Hotspot Overlay (Opens Ticket Popup Form) */}
+            <button
+              type="button"
               className="presale-hotspot-btn"
-              aria-label="Pesan Tiket Early Bird TEDxUNJ (Google Form)"
-            >
-              <span className="sr-only">Pesan Tiket Early Bird</span>
-            </a>
+              onClick={() => {
+                setFormSubmitted(false);
+                setIsPreSaleModalOpen(true);
+              }}
+              aria-label="Pesan Tiket Pre-Sale"
+            />
           </div>
 
           {/* Section 5 Secure Seat SVG: secure-set.svg (Static Banner) */}
@@ -862,7 +818,7 @@ export default function EventPage({ addToCart: _addToCart, ticketTypes: _ticketT
       {/* ==========================================
          INTERACTIVE TICKET POPUP MODAL (popup-ticket.svg)
          ========================================== */}
-      {ENABLE_CHECKOUT_POPUP && isPreSaleModalOpen && (
+      {isPreSaleModalOpen && (
         <div
           className="ticket-modal-backdrop"
           onClick={handleClosePreSaleModal}
