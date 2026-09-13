@@ -29,6 +29,8 @@ interface Speaker {
   time: string;
 }
 
+const EARLY_BIRD_FORM_URL = "https://bit.ly/EarlyBirdTicketTEDxUNJ50";
+
 export default function EventPage({ addToCart: _addToCart, ticketTypes: _ticketTypes }: EventPageProps) {
   // Feature Flag: Set VITE_ENABLE_CHECKOUT=true in .env to enable the checkout popup flow.
   // Defaults to false for safe Production deployment (Option C: visual banner only).
@@ -799,18 +801,16 @@ export default function EventPage({ addToCart: _addToCart, ticketTypes: _ticketT
               alt="Harga Ticket"
               className="sec5-comingsoon-svg"
             />
-            {/* Clickable Pre-Sale Hotspot Overlay (Active only when ENABLE_CHECKOUT_POPUP is true) */}
-            {ENABLE_CHECKOUT_POPUP && (
-              <button
-                type="button"
-                className="presale-hotspot-btn"
-                onClick={() => {
-                  setFormSubmitted(false);
-                  setIsPreSaleModalOpen(true);
-                }}
-                aria-label="Pesan Tiket Pre-Sale"
-              />
-            )}
+            {/* Clickable Early Bird / Pre-Sale Hotspot Overlay (Opens Google Form) */}
+            <a
+              href={EARLY_BIRD_FORM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="presale-hotspot-btn"
+              aria-label="Pesan Tiket Early Bird TEDxUNJ (Google Form)"
+            >
+              <span className="sr-only">Pesan Tiket Early Bird</span>
+            </a>
           </div>
 
           {/* Section 5 Secure Seat SVG: secure-set.svg (Static Banner) */}
