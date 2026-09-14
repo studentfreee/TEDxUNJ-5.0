@@ -46,7 +46,7 @@ export default function MerchSection() {
           aria-label="Buy TEDxUNJ Merchandise (Google Form)"
         >
           <img
-            src="/merch/buy-me-ticket.svg"
+            src="/merch/buy-me.svg"
             alt="Buy Me Ticket"
             className="merch-buyme-ticket-img"
           />
