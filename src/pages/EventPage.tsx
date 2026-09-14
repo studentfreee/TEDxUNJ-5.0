@@ -10,6 +10,7 @@ import {
   X
 } from 'lucide-react';
 import MerchSection from '../components/MerchSection';
+import { EARLY_BIRD_FORM_URL } from '../constants';
 
 interface EventPageProps {
   addToCart?: (type: 'single' | 'double' | 'triple') => void;
@@ -28,8 +29,6 @@ interface Speaker {
   talkTitle: string;
   time: string;
 }
-
-const EARLY_BIRD_FORM_URL = "https://bit.ly/EarlyBirdTicketTEDxUNJ50";
 
 export default function EventPage({ addToCart: _addToCart, ticketTypes: _ticketTypes }: EventPageProps) {
   // Feature Flag: Set VITE_ENABLE_CHECKOUT=true in .env to enable the checkout popup flow.
@@ -750,31 +749,29 @@ export default function EventPage({ addToCart: _addToCart, ticketTypes: _ticketT
             />
           </div>
 
-          {/* Section 5 Ticket Prices SVG: harga-ticket.svg with Interactive Pre-Sale Hotspot */}
-          <div className="sec5-comingsoon-svg-wrapper interactive-ticket-wrapper">
+          {/* Section 5 Ticket Prices SVG: harga-ticket.svg (Static Banner) */}
+          <div className="sec5-comingsoon-svg-wrapper">
             <img
               src="/assets/betawi/harga-ticket.svg"
               alt="Harga Ticket"
               className="sec5-comingsoon-svg"
             />
-            {/* Clickable Pre-Sale Hotspot — langsung ke Google Form */}
-            <a
-              href={EARLY_BIRD_FORM_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="presale-hotspot-btn"
-              aria-label="Pesan Tiket Pre-Sale (Google Form)"
-            />
           </div>
 
-          {/* Section 5 Secure Seat SVG: secure-set.svg (Static Banner) */}
-          <div className="sec5-secureset-svg-wrapper">
+          {/* Section 5 Secure Seat SVG: secure-set.svg (Clickable to Google Form) */}
+          <a
+            href={EARLY_BIRD_FORM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="sec5-secureset-svg-wrapper"
+            aria-label="Secure Your Seat (Google Form)"
+          >
             <img
               src="/assets/betawi/secure-set.svg"
               alt="Secure Your Seat"
               className="sec5-secureset-svg"
             />
-          </div>
+          </a>
         </div>
       </section>
 

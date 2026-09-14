@@ -10604,6 +10604,8 @@ h3 {
   justify-content: center;
   align-items: center;
   margin-top: 20px;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .sec5-secureset-svg {
@@ -10612,11 +10614,13 @@ h3 {
   height: auto;
   display: block;
   filter: drop-shadow(0px 15px 30px rgba(0, 0, 0, 0.3));
-  transition: transform 0.4s ease;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
 }
 
+.sec5-secureset-svg-wrapper:hover .sec5-secureset-svg,
 .sec5-secureset-svg:hover {
-  transform: translateY(-4px) scale(1.01);
+  transform: translateY(-6px) scale(1.02);
+  filter: drop-shadow(0px 20px 35px rgba(222, 47, 90, 0.5));
 }
 
 /* Standalone Footer Section Below Section 5 (Event Page) */

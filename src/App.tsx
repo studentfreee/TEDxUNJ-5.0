@@ -13,6 +13,7 @@ import {
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import EventPage from './pages/EventPage';
+import { EARLY_BIRD_FORM_URL } from './constants';
 
 export default function App() {
   const navigate = useNavigate();
@@ -254,17 +255,15 @@ export default function App() {
             ABOUT <img src="/assets/betawi/dropdown_icon.svg" alt="v" style={{ width: 12, height: 12, marginLeft: 2 }} />
           </a>
 
-          <button
+          <a
+            href={EARLY_BIRD_FORM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="betawi-cta-btn"
-            onClick={() => {
-              navigate('/event');
-              setTimeout(() => {
-                document.getElementById('event-comingsoon-section')?.scrollIntoView({ behavior: 'smooth' });
-              }, 100);
-            }}
+            style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}
           >
             RESERVE A PASS
-          </button>
+          </a>
         </nav>
 
         {/* Dedicated Mobile Hamburger Toggle Button */}
@@ -371,19 +370,17 @@ export default function App() {
           </nav>
 
           {/* CTA Reserve Pass Button */}
-          <button
+          <a
+            href={EARLY_BIRD_FORM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="sheet-cta-btn"
-            onClick={() => {
-              setIsMenuOpen(false);
-              navigate('/event');
-              setTimeout(() => {
-                document.getElementById('event-comingsoon-section')?.scrollIntoView({ behavior: 'smooth' });
-              }, 100);
-            }}
+            style={{ textDecoration: 'none' }}
+            onClick={() => setIsMenuOpen(false)}
           >
             <span>RESERVE A PASS</span>
             <ArrowRight size={18} />
-          </button>
+          </a>
         </div>
       </div>
 
