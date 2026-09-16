@@ -65,7 +65,7 @@ export default function AboutFooter() {
               aria-hidden="true"
               className="about-footer-copyright-icon"
             />
-            <span>2025 All Rights Reserved</span>
+            <span>{new Date().getFullYear()} All Rights Reserved</span>
           </div>
           <p className="about-footer-legal-line">
             This independent TEDx event is operated

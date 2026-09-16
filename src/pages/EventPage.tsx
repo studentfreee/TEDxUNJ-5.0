@@ -803,7 +803,7 @@ export default function EventPage({ addToCart: _addToCart, ticketTypes: _ticketT
           </div>
 
           <div className="footer-legal">
-            <p className="legal-line">&copy;2025 All Rights Reserved</p>
+            <p className="legal-line">&copy;{new Date().getFullYear()} All Rights Reserved</p>
             <p className="legal-line">This independent TEDx event is operated</p>
             <p className="legal-line">under license from TED</p>
           </div>
