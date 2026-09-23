@@ -1,15 +1,39 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 export default function PhilosophySection() {
   // bookState: 0 = Closed Cover, 1 = Learn & Create (learn-create.svg), 2 = Grow (grow.svg)
   const [bookState, setBookState] = useState<number>(0);
+  const sectionRef = useRef<HTMLElement>(null);
+  const [hasAutoOpened, setHasAutoOpened] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasAutoOpened) {
+            setBookState(1);
+            setHasAutoOpened(true);
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [hasAutoOpened]);
 
   const handleBookClick = () => {
     setBookState((prev) => (prev + 1) % 3);
   };
 
   return (
-    <section id="philosophy" className="philosophy-section">
+    <section id="philosophy" ref={sectionRef} className="philosophy-section">
       {/* Background Vertical Stripes Texture (philosophy_bg_stripes.png) */}
       <div className="philosophy-bg-stripes-layer">
         <img

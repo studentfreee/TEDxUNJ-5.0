@@ -106,6 +106,38 @@ export default function HomePage({
             <div className={`betawi-pulse-circle ${isWindowOpen ? 'is-open' : ''}`}>
               <div className="circle-inner"></div>
             </div>
+
+            {/* 5. "TAP ME" Hero Typography Badge */}
+            <div className={`hero-tap-me-wrapper ${isWindowOpen ? 'is-open' : ''}`}>
+              <svg className="hero-tap-me-svg" viewBox="0 0 160 40">
+                <defs>
+                  <linearGradient id="tapMeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#DE2F5A" />
+                    <stop offset="100%" stopColor="#FDA22F" />
+                  </linearGradient>
+                  <filter id="tapMeShadow" x="-20%" y="-20%" width="160%" height="160%">
+                    <feDropShadow dx="0" dy="4" stdDeviation="3" floodColor="#000000" floodOpacity="0.35" />
+                  </filter>
+                </defs>
+                <text
+                  x="50%"
+                  y="72%"
+                  textAnchor="middle"
+                  fontFamily="'Source Serif 4', Georgia, serif"
+                  fontWeight="900"
+                  fontSize="22"
+                  letterSpacing="3"
+                  fill="url(#tapMeGrad)"
+                  stroke="#FFFFFF"
+                  strokeWidth="3.5"
+                  strokeLinejoin="round"
+                  paintOrder="stroke fill"
+                  filter="url(#tapMeShadow)"
+                >
+                  TAP ME
+                </text>
+              </svg>
+            </div>
           </div>
 
           {/* Headlines Animated SVG Typography */}

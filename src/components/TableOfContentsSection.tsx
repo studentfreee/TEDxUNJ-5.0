@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 interface TableOfContentsSectionProps {
   navigate?: (path: string) => void;
@@ -6,6 +6,30 @@ interface TableOfContentsSectionProps {
 
 export default function TableOfContentsSection({ navigate }: TableOfContentsSectionProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  const [hasAutoOpened, setHasAutoOpened] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasAutoOpened) {
+            setIsOpen(true);
+            setHasAutoOpened(true);
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [hasAutoOpened]);
 
   const menuItems = [
     { num: '01', title: 'Introduction & Theme', targetId: 'introduce' },
@@ -47,7 +71,7 @@ export default function TableOfContentsSection({ navigate }: TableOfContentsSect
   };
 
   return (
-    <section id="toc" className="toc-section">
+    <section id="toc" ref={sectionRef} className="toc-section">
       {/* Background Menu Pattern SVG Layer (bg-menu.svg) */}
       <div className="toc-bg-menu-layer">
         <img

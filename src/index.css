@@ -6562,6 +6562,40 @@ h3 {
   background: rgba(250, 235, 167, 0.35);
 }
 
+/* Hero "TAP ME" Typography Badge */
+.hero-tap-me-wrapper {
+  position: absolute;
+  top: 64%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 26;
+  pointer-events: none;
+  animation: tapMeBounce 1.8s infinite ease-in-out;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.hero-tap-me-wrapper.is-open {
+  opacity: 0;
+  transform: translateX(-50%) translateY(12px);
+  pointer-events: none;
+}
+
+.hero-tap-me-svg {
+  width: 140px;
+  height: 38px;
+  display: block;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
+}
+
+@keyframes tapMeBounce {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-6px);
+  }
+}
+
 @keyframes singleCirclePulsate {
 
   0%,
