@@ -749,10 +749,10 @@ export default function EventPage({ addToCart: _addToCart, ticketTypes: _ticketT
             />
           </div>
 
-          {/* Section 5 Ticket Prices SVG: harga-ticket.svg (Static Banner) */}
+          {/* Section 5 Ticket Prices SVG: harga-ticket1.svg (Static Banner) */}
           <div className="sec5-comingsoon-svg-wrapper">
             <img
-              src="/assets/betawi/harga-ticket.svg"
+              src="/assets/betawi/harga-ticket1.svg"
               alt="Harga Ticket"
               className="sec5-comingsoon-svg"
             />
