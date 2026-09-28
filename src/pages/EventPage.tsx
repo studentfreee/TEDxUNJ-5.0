@@ -10,7 +10,7 @@ import {
   X
 } from 'lucide-react';
 import MerchSection from '../components/MerchSection';
-import { EARLY_BIRD_FORM_URL } from '../constants';
+import { NORMAL_SALE_FORM_URL } from '../constants';
 
 interface EventPageProps {
   addToCart?: (type: 'single' | 'double' | 'triple') => void;
@@ -82,7 +82,7 @@ export default function EventPage({ addToCart: _addToCart, ticketTypes: _ticketT
     }
 
     // Redirect to Google Form instead of Midtrans
-    window.open(EARLY_BIRD_FORM_URL, '_blank', 'noopener,noreferrer');
+    window.open(NORMAL_SALE_FORM_URL, '_blank', 'noopener,noreferrer');
     setFormSubmitted(true);
   };
 
@@ -760,7 +760,7 @@ export default function EventPage({ addToCart: _addToCart, ticketTypes: _ticketT
 
           {/* Section 5 Secure Seat SVG: secure-set.svg (Clickable to Google Form) */}
           <a
-            href={EARLY_BIRD_FORM_URL}
+            href={NORMAL_SALE_FORM_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="sec5-secureset-svg-wrapper"
