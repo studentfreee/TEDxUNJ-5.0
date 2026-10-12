@@ -589,8 +589,8 @@ export default function EventPage({ addToCart: _addToCart, ticketTypes: _ticketT
               />
               <div className="findway-map-inner-frame">
                 <iframe
-                  title="Google Maps Location Perpustakaan Nasional RI"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.621255535974!2d106.82483867586717!3d-6.181419793806085!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f4326f54c93d%3A0x673e3bc2145b2f0a!2sNational%20Library%20of%20the%20Republic%20of%20Indonesia!5e0!3m2!1sen!2sid!4v1700000000000!5m2!1sen!2sid"
+                  title="Google Maps Lokasi Perpustakaan Nasional RI"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.620897453006!2d106.82438977586716!3d-6.181451893806054!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f442596e0c93%3A0x4ba58be40979fe36!2sPerpustakaan%20Nasional%20Republik%20Indonesia!5e0!3m2!1sid!2sid!4v1724718000000!5m2!1sid!2sid"
                   style={{ border: 0, width: '100%', height: '100%' }}
                   loading="lazy"
                   allowFullScreen
