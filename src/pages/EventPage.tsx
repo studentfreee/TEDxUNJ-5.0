@@ -35,9 +35,8 @@ export default function EventPage({ addToCart: _addToCart, ticketTypes: _ticketT
   // Defaults to false for safe Production deployment (Option C: visual banner only).
   const ENABLE_CHECKOUT_POPUP = import.meta.env.VITE_ENABLE_CHECKOUT === 'true';
 
-  // Feature Flag: Set to true when speaker lineup is ready to be published.
-  // Defaults to false to temporarily hide Section 2 (Speakers) without affecting other sections.
-  const ENABLE_SPEAKERS_SECTION = false;
+  // Feature Flag: Set VITE_ENABLE_SPEAKERS=false in .env/Vercel to hide, defaults to true.
+  const ENABLE_SPEAKERS_SECTION = import.meta.env.VITE_ENABLE_SPEAKERS !== 'false';
 
   const [selectedSpeaker, setSelectedSpeaker] = useState<Speaker | null>(null);
   const modalRef = useRef<HTMLDivElement>(null);
@@ -106,7 +105,7 @@ export default function EventPage({ addToCart: _addToCart, ticketTypes: _ticketT
       role: 'Education Innovator & Youth Advocate',
       photo: '/assets/bilgates.webp',
       svgAsset: '/assets/betawi/speaker-ajeng.svg',
-      popupAsset: '/assets/betawi/popup-speaker-ajeng.svg',
+      popupAsset: '/assets/betawi/detail-speaker-ajeng.svg',
       instagramUrl: 'https://www.instagram.com/asmarandhany.talks',
       talkTitle: 'Empowering Next-Gen Learners in Digital Era',
       time: '09:30 - 10:15 WIB',
@@ -150,25 +149,27 @@ export default function EventPage({ addToCart: _addToCart, ticketTypes: _ticketT
     },
     {
       id: 'speaker-5',
-      name: 'To Be Announced',
-      role: 'To Be Announced',
-      photo: '',
-      svgAsset: '/assets/betawi/to-be-anounced.svg',
-      popupAsset: '',
-      talkTitle: 'To Be Announced',
+      name: 'Indah Cahya',
+      role: 'Member of JKT48 & Creative Performer',
+      photo: '/assets/xaviera.jpeg',
+      svgAsset: '/assets/betawi/speaker-indah.svg',
+      popupAsset: '/assets/betawi/detail-speaker-indah.svg',
+      instagramUrl: 'https://www.instagram.com/jkt48indah_/',
+      talkTitle: 'Inspiring Youth Through Art & Performance',
       time: '15:00 - 15:45 WIB',
-      bio: 'Speaker details will be announced soon.'
+      bio: 'Member of JKT48 sharing journey, creative discipline, and passion in inspiring young generations.'
     },
     {
       id: 'speaker-6',
-      name: 'To Be Announced',
-      role: 'To Be Announced',
+      name: 'David Noah',
+      role: 'Musician & Creative Composer',
       photo: '',
-      svgAsset: '/assets/betawi/to-be-anounced1.svg',
-      popupAsset: '',
-      talkTitle: 'To Be Announced',
+      svgAsset: '/assets/betawi/speaker-david.svg',
+      popupAsset: '/assets/betawi/detail-speaker-david.svg',
+      instagramUrl: 'https://www.instagram.com/davidnoahl/',
+      talkTitle: 'Harmonizing Creativity & Musical Passion',
       time: '16:00 - 16:45 WIB',
-      bio: 'Speaker details will be announced soon.'
+      bio: 'Renowned keyboardist and composer sharing insights on music production, artistic persistence, and creative collaboration.'
     }
   ];
 
