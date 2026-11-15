@@ -1,0 +1,1418 @@
+/* ==========================================================================
+   TASK ANSWER PAGE ("TEDXUNJ WEB DESIGN (Copy)" - Figma #620:57 .. #620:572)
+   ========================================================================== */
+
+.task-answer-page {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: 'Source Serif 4', 'Source Serif Pro', Georgia, serif;
+}
+
+.ta-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ==========================================================================
+   SHARED UTILITIES: STRIPES & OUTLINED GRADIENT TYPOGRAPHY
+   ========================================================================== */
+.ta-stripes-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  z-index: 1;
+  transition:
+    transform 0.75s cubic-bezier(0.165, 0.84, 0.44, 1),
+    filter 0.75s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.ta-cover-section:hover .ta-stripes-bg,
+.ta-intro-section:hover .ta-stripes-bg,
+.ta-closing-section:hover .ta-stripes-bg {
+  transform: scale(1.018);
+  filter: brightness(1.04);
+}
+
+.ta-section-heading-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  user-select: none;
+}
+
+/* Layered Outlined Gradient Text (White Stroke + Shadow behind Pink->Orange Fill) */
+.ta-outlined-grad {
+  position: relative;
+  display: block;
+  margin: 0;
+  font-family: 'Source Serif 4', 'Source Serif Pro', Georgia, serif;
+  line-height: 1.28;
+}
+
+.ta-outlined-grad__stroke {
+  display: block;
+  color: #FFFFFF;
+  -webkit-text-stroke: 8px #FFFFFF;
+  paint-order: stroke fill;
+  stroke-linejoin: round;
+  filter: drop-shadow(-4.5px 9px 4.5px rgba(0, 0, 0, 0.25));
+  user-select: none;
+}
+
+.ta-outlined-grad__fill {
+  position: absolute;
+  inset: 0;
+  display: block;
+  background: linear-gradient(90deg, #DE2F5A 0%, #FDA22F 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ==========================================================================
+   SECTION 1: COVER "Task Answer" (Figma Frame #620:57)
+   ========================================================================== */
+.ta-cover-section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #C7C263 70%, #FD8A2F 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: clamp(110px, 14vh, 165px) 20px clamp(60px, 8vh, 96px);
+  box-sizing: border-box;
+}
+
+/* Top Gigi Balang Fence Strip (#620:204) */
+.ta-cover-gigi-balang-top {
+  position: absolute;
+  top: 53px;
+  left: 0;
+  width: 100%;
+  height: clamp(140px, 20.14vw, 290px);
+  object-fit: cover;
+  object-position: top center;
+  pointer-events: none;
+  z-index: 2;
+  transition:
+    transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1),
+    filter 0.6s ease;
+}
+
+.ta-cover-section:hover .ta-cover-gigi-balang-top {
+  transform: translateY(4px) scale(1.01);
+}
+
+/* Top Purple-Magenta Fade (#620:208) */
+.ta-cover-top-fade {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  width: 100%;
+  height: 48%;
+  background: linear-gradient(180deg, #A92E91 0%, rgba(250, 235, 167, 0) 100%);
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Bottom Olive-Green Fade (#620:203) */
+.ta-cover-bottom-fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 48%;
+  background: linear-gradient(180deg, rgba(250, 235, 167, 0) 0%, #C7C263 100%);
+  pointer-events: none;
+  z-index: 4;
+}
+
+/* Left & Right Monas Landmark Towers (#620:137 & #620:58) */
+.ta-cover-monas {
+  position: absolute;
+  bottom: 0;
+  width: clamp(220px, 31.8vw, 458px);
+  height: auto;
+  max-height: 74%;
+  object-fit: contain;
+  object-position: bottom center;
+  z-index: 5;
+  cursor: pointer;
+  transition:
+    transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1),
+    filter 0.55s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.ta-cover-section:hover .ta-cover-monas--left {
+  transform: translateY(-6px) rotate(1deg);
+}
+
+.ta-cover-section:hover .ta-cover-monas--right {
+  transform: translateY(-6px) rotate(-1deg);
+}
+
+.ta-cover-monas--left:hover {
+  transform: translateY(-16px) scale(1.04) rotate(2deg) !important;
+  filter: drop-shadow(0px 16px 32px rgba(253, 162, 47, 0.6));
+}
+
+.ta-cover-monas--right:hover {
+  transform: translateY(-16px) scale(1.04) rotate(-2deg) !important;
+  filter: drop-shadow(0px 16px 32px rgba(253, 162, 47, 0.6));
+}
+
+.ta-cover-monas--left {
+  left: -3.5%;
+}
+
+.ta-cover-monas--right {
+  right: -4.2%;
+}
+
+.ta-cover-inner {
+  position: relative;
+  z-index: 6;
+  width: 100%;
+  max-width: 1440px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(8px, 1.5vh, 18px);
+}
+
+.ta-cover-title-wrap,
+.ta-intro-title-wrap,
+.ta-key-heading-wrap,
+.ta-closing-title-wrap {
+  cursor: pointer;
+  transition:
+    transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+    filter 0.45s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.ta-cover-title-wrap:hover,
+.ta-intro-title-wrap:hover,
+.ta-key-heading-wrap:hover,
+.ta-closing-title-wrap:hover {
+  transform: translateY(-6px) scale(1.03);
+  filter:
+    drop-shadow(0px 12px 24px rgba(222, 47, 90, 0.42))
+    drop-shadow(0px 0px 18px rgba(253, 233, 172, 0.6));
+}
+
+.ta-cover-title-wrap {
+  width: min(520px, 84vw);
+}
+
+.ta-cover-book-btn {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: taBookFloat 4.2s ease-in-out infinite;
+}
+
+.ta-cover-book-img {
+  width: min(560px, 76vw);
+  height: auto;
+  display: block;
+  object-fit: contain;
+  user-select: none;
+  transition:
+    transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+    filter 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.ta-cover-book-btn:hover .ta-cover-book-img {
+  transform: translateY(-12px) scale(1.055) rotate(-2.5deg);
+  filter:
+    drop-shadow(0px 22px 38px rgba(222, 47, 90, 0.52))
+    drop-shadow(0px 0px 28px rgba(255, 255, 255, 0.8));
+}
+
+.ta-cover-book-btn:active .ta-cover-book-img {
+  transform: translateY(-4px) scale(0.99);
+}
+
+@keyframes taBookFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* ==========================================================================
+   SECTION 2: INTRO "Halo, Abang, Mpok!" (Figma Frame #620:315)
+   ========================================================================== */
+.ta-intro-section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #C7C263 70%, #FD8A2F 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: clamp(56px, 8vh, 96px) clamp(16px, 4vw, 64px) clamp(64px, 9vh, 100px);
+  box-sizing: border-box;
+}
+
+.ta-intro-top-fade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 32%;
+  background: linear-gradient(180deg, #C7C263 0%, rgba(250, 235, 167, 0) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.ta-intro-bottom-fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 68%;
+  background: linear-gradient(180deg, rgba(250, 235, 167, 0) 0%, #A92E91 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.ta-intro-inner {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  max-width: 1240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(20px, 3vh, 36px);
+}
+
+.ta-intro-title-wrap {
+  width: min(680px, 90vw);
+}
+
+/* Desktop 3-column stage: Left Bubble + Mascot BAWI + Right Bubble */
+.ta-intro-stage {
+  position: relative;
+  width: 100%;
+  max-width: 1120px;
+  min-height: 470px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ta-intro-mascot-wrap {
+  position: relative;
+  z-index: 3;
+  width: clamp(280px, 32vw, 460px);
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+    filter 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.ta-intro-mascot-wrap:hover {
+  transform: translateY(-10px) scale(1.065) rotate(-3deg);
+}
+
+.ta-intro-mascot-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0px 22px 22px rgba(236, 110, 142, 0.95));
+  animation: taMascotFloat 3.8s ease-in-out infinite;
+  transition: filter 0.45s ease;
+}
+
+.ta-intro-mascot-wrap:hover .ta-intro-mascot-img {
+  filter:
+    drop-shadow(0px 26px 32px rgba(236, 110, 142, 1))
+    drop-shadow(0px 0px 26px rgba(253, 233, 172, 0.8));
+}
+
+@keyframes taMascotFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(1.2deg);
+  }
+}
+
+/* Speech Bubbles (#620:337 & #620:333) */
+.ta-speech-bubble {
+  position: absolute;
+  z-index: 4;
+  cursor: pointer;
+  transition:
+    transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+    filter 0.45s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.ta-speech-bubble--left:hover {
+  transform: translateY(-9px) scale(1.04) rotate(-1.5deg);
+  filter:
+    drop-shadow(0px 18px 30px rgba(222, 47, 90, 0.36))
+    drop-shadow(0px 0px 18px rgba(253, 233, 172, 0.55));
+}
+
+.ta-speech-bubble--right:hover {
+  transform: translateY(-9px) scale(1.04) rotate(1.5deg);
+  filter:
+    drop-shadow(0px 18px 30px rgba(222, 47, 90, 0.36))
+    drop-shadow(0px 0px 18px rgba(253, 233, 172, 0.55));
+}
+
+.ta-speech-bubble--left {
+  top: 2%;
+  left: 4%;
+  width: clamp(270px, 25.5vw, 355px);
+  aspect-ratio: 355 / 236;
+}
+
+.ta-speech-bubble--right {
+  bottom: 2%;
+  right: 2%;
+  width: clamp(300px, 29.5vw, 413px);
+  aspect-ratio: 413 / 268;
+}
+
+.ta-speech-bubble__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+}
+
+/* Hidden on Desktop (>1024px); enabled only in tablet/mobile Opsi B */
+.ta-speech-bubble__mobile-tail {
+  display: none;
+}
+
+.ta-speech-bubble__content {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.ta-speech-bubble__content--left {
+  top: 4%;
+  left: 4%;
+  width: 86%;
+  height: 67%;
+  padding: 10px 14px;
+}
+
+.ta-speech-bubble__content--right {
+  top: 4%;
+  left: 11%;
+  width: 82%;
+  height: 85%;
+  padding: 12px 14px;
+}
+
+/* White text with pink-orange stroke inside speech bubbles (#620:340 & #620:336) */
+.ta-bubble-outlined-text {
+  position: relative;
+  margin: 0;
+  font-family: 'Source Serif 4', 'Source Serif Pro', Georgia, serif;
+  font-weight: 900;
+  line-height: 1.26;
+  text-align: center;
+}
+
+.ta-bubble-outlined-text--left {
+  font-size: clamp(15px, 1.38vw, 20px);
+}
+
+.ta-bubble-outlined-text--right {
+  font-size: clamp(13px, 1.2vw, 17.2px);
+}
+
+.ta-bubble-outlined-text__stroke {
+  display: block;
+  color: #EC6E8E;
+  -webkit-text-stroke: 4.5px #E86568;
+  paint-order: stroke fill;
+  stroke-linejoin: round;
+  user-select: none;
+}
+
+.ta-bubble-outlined-text__fill {
+  position: absolute;
+  inset: 0;
+  display: block;
+  color: #FFFFFF;
+}
+
+/* Bottom Wide Glass Banner (#620:341 & #620:342) */
+.ta-intro-bottom-banner {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 1189px;
+  min-height: 120px;
+  padding: clamp(20px, 2.5vw, 28px) clamp(24px, 5vw, 88px);
+  border-radius: 17.54px;
+  background: linear-gradient(
+    180deg,
+    rgba(253, 233, 172, 0.22) 0%,
+    rgba(222, 47, 90, 0.22) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.36);
+  box-shadow: 0px 13.12px 9.84px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition:
+    transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.45s ease,
+    border-color 0.45s ease,
+    background 0.45s ease;
+}
+
+.ta-intro-bottom-banner::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 65%;
+  height: 100%;
+  background: linear-gradient(
+    105deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.32) 50%,
+    transparent 80%
+  );
+  transform: skewX(-20deg);
+  transition: left 0.75s cubic-bezier(0.165, 0.84, 0.44, 1);
+  pointer-events: none;
+}
+
+.ta-intro-bottom-banner:hover {
+  transform: translateY(-7px) scale(1.015);
+  border-color: rgba(255, 255, 255, 0.78);
+  background: linear-gradient(
+    180deg,
+    rgba(253, 233, 172, 0.32) 0%,
+    rgba(222, 47, 90, 0.32) 100%
+  );
+  box-shadow:
+    0px 22px 36px rgba(222, 47, 90, 0.38),
+    0px 10px 18px rgba(0, 0, 0, 0.25);
+}
+
+.ta-intro-bottom-banner:hover::after {
+  left: 140%;
+}
+
+.ta-intro-banner-text {
+  font-weight: 700;
+  font-size: clamp(18px, 2.03vw, 29.3px);
+  text-align: center;
+  line-height: 1.3;
+}
+
+.ta-intro-banner-text .ta-outlined-grad__stroke {
+  -webkit-text-stroke: 7px #FFFFFF;
+  filter: drop-shadow(-4.48px 8.96px 4.48px rgba(0, 0, 0, 0.25));
+}
+
+.ta-intro-banner-text .ta-outlined-grad__fill {
+  background: linear-gradient(90deg, #DE2A59 45%, #FD8A2F 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ==========================================================================
+   SECTION 3: 5 KEY ANSWER BOARDS (Figma Frames #620:343 .. #620:427)
+   ========================================================================== */
+.ta-key-section {
+  position: relative;
+  width: 100%;
+  background: linear-gradient(180deg, #EF5E84 0%, #C7C263 100%);
+  display: flex;
+  justify-content: center;
+  padding: clamp(48px, 6.5vh, 84px) clamp(16px, 4.5vw, 80px) clamp(56px, 7.5vh, 96px);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.ta-key-top-fade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 326px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.ta-key-bottom-fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 185px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Seamless alternating top/bottom transitions matching Figma #620:343..#620:427 */
+.ta-key-section--even .ta-key-top-fade {
+  background: linear-gradient(180deg, #A92E91 0%, rgba(250, 235, 167, 0) 100%);
+}
+
+.ta-key-section--even .ta-key-bottom-fade {
+  background: linear-gradient(180deg, rgba(250, 235, 167, 0) 0%, #DE2A59 100%);
+}
+
+.ta-key-section--odd .ta-key-top-fade {
+  background: linear-gradient(180deg, #DE2A59 0%, rgba(250, 235, 167, 0) 100%);
+}
+
+.ta-key-section--odd .ta-key-bottom-fade {
+  background: linear-gradient(180deg, rgba(250, 235, 167, 0) 0%, #A92E91 100%);
+}
+
+.ta-key-inner {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 1273px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(14px, 2.2vh, 26px);
+}
+
+.ta-key-heading-wrap {
+  width: min(984px, 94vw);
+}
+
+/* Cream-to-Crimson Board Card (#620:345, 1273x831) */
+.ta-key-board {
+  width: 100%;
+  border-radius: 15.92px;
+  background: linear-gradient(180deg, #FDE9AC 0%, #DE2F5A 100%);
+  box-shadow: 0px 11.91px 8.93px rgba(0, 0, 0, 0.25);
+  padding: clamp(28px, 4vw, 52px) clamp(20px, 4.2vw, 56px) clamp(34px, 4.5vw, 60px);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(32px, 4.2vw, 54px);
+  box-sizing: border-box;
+  transition:
+    transform 0.45s cubic-bezier(0.165, 0.84, 0.44, 1),
+    box-shadow 0.45s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.ta-key-board:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0px 22px 40px rgba(0, 0, 0, 0.32),
+    0px 0px 28px rgba(253, 233, 172, 0.32);
+}
+
+.ta-key-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(14px, 1.8vw, 22px);
+}
+
+/* 1. Numbered Question Statement (#620:349) */
+.ta-key-question {
+  font-weight: 900;
+  font-size: clamp(18px, 1.74vw, 25px);
+  line-height: 1.32;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+    filter 0.4s ease;
+}
+
+.ta-key-item:hover .ta-key-question,
+.ta-key-question:hover {
+  transform: translateX(6px) scale(1.01);
+  filter: drop-shadow(0px 4px 12px rgba(222, 47, 90, 0.28));
+}
+
+.ta-key-question .ta-outlined-grad__stroke {
+  -webkit-text-stroke: 7.5px #FFFFFF;
+  filter: drop-shadow(-4.96px 9.92px 4.96px rgba(0, 0, 0, 0.25));
+}
+
+/* 2. Ornamental Notched Answer Plaque (#620:350 & #620:353) */
+.ta-plaque-badge {
+  position: relative;
+  width: clamp(230px, 21vw, 300.13px);
+  aspect-ratio: 300.13 / 50.63;
+  margin-left: clamp(8px, 2.2vw, 31px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  cursor: pointer;
+  transition:
+    transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+    filter 0.45s ease;
+}
+
+.ta-plaque-badge:hover {
+  transform: translateY(-5px) scale(1.075) rotate(-1.5deg);
+  filter:
+    drop-shadow(0px 12px 22px rgba(222, 47, 90, 0.45))
+    drop-shadow(0px 0px 14px rgba(253, 233, 172, 0.7));
+}
+
+.ta-plaque-badge__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+}
+
+.ta-plaque-badge__content {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(6px, 0.7vw, 10px);
+}
+
+.ta-plaque-text {
+  position: relative;
+  display: inline-block;
+  font-family: 'Source Serif 4', 'Source Serif Pro', Georgia, serif;
+  font-weight: 900;
+  font-size: clamp(18px, 1.78vw, 25.6px);
+  line-height: 1;
+}
+
+.ta-plaque-text__stroke {
+  display: block;
+  color: #E55A66;
+  -webkit-text-stroke: 5.5px #E55A66;
+  paint-order: stroke fill;
+  stroke-linejoin: round;
+}
+
+.ta-plaque-text__fill {
+  position: absolute;
+  inset: 0;
+  display: block;
+  color: #FFFFFF;
+}
+
+.ta-plaque-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-weight: 900;
+  line-height: 1;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.ta-plaque-badge:hover .ta-plaque-icon {
+  transform: scale(1.22) rotate(10deg);
+}
+
+.ta-plaque-icon--myth {
+  color: #D90429;
+  font-size: clamp(19px, 1.85vw, 26px);
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2));
+}
+
+.ta-plaque-icon--fact {
+  width: clamp(20px, 1.65vw, 24px);
+  height: clamp(20px, 1.65vw, 24px);
+  border-radius: 5px;
+  background: linear-gradient(180deg, #37D64B 0%, #19A52C 100%);
+  border: 1.5px solid #148323;
+  color: #FFFFFF;
+  font-size: clamp(13px, 1.15vw, 16px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* 3. Inner Glass Explanation Box (#620:354 & #620:355) */
+.ta-key-explanation-box {
+  position: relative;
+  overflow: hidden;
+  width: calc(100% - clamp(0px, 2.5vw, 36px));
+  margin-left: clamp(0px, 2.5vw, 36px);
+  min-height: 150px;
+  padding: clamp(18px, 2vw, 24px) clamp(20px, 2.6vw, 34px);
+  border-radius: 17.54px;
+  background: linear-gradient(
+    180deg,
+    rgba(253, 233, 172, 0.22) 0%,
+    rgba(222, 47, 90, 0.22) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0px 13.12px 9.84px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition:
+    transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+    background 0.45s ease,
+    border-color 0.45s ease,
+    box-shadow 0.45s ease;
+}
+
+.ta-key-explanation-box::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    105deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.28) 50%,
+    transparent 80%
+  );
+  transform: skewX(-20deg);
+  transition: left 0.75s cubic-bezier(0.165, 0.84, 0.44, 1);
+  pointer-events: none;
+}
+
+.ta-key-explanation-box:hover {
+  transform: translateY(-6px) scale(1.012);
+  background: linear-gradient(
+    180deg,
+    rgba(253, 233, 172, 0.34) 0%,
+    rgba(222, 47, 90, 0.34) 100%
+  );
+  border-color: rgba(255, 255, 255, 0.8);
+  box-shadow:
+    0px 20px 32px rgba(0, 0, 0, 0.32),
+    0px 0px 20px rgba(253, 233, 172, 0.3);
+}
+
+.ta-key-explanation-box:hover::after {
+  left: 140%;
+}
+
+.ta-key-explanation-lead,
+.ta-key-explanation-body {
+  margin: 0;
+  color: #F5F5F6;
+  font-family: 'Source Serif 4', 'Source Serif Pro', Georgia, serif;
+  font-weight: 800;
+  font-size: clamp(14px, 1.06vw, 15.2px);
+  line-height: 1.45;
+  text-align: left;
+}
+
+/* ==========================================================================
+   SECTION 4: CLOSING "Nah, gimane hasilnye, Abang Mpok?" (Figma #620:448)
+   ========================================================================== */
+.ta-closing-section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #C7C263 70%, #FD8A2F 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: clamp(56px, 8vh, 96px) clamp(16px, 4vw, 64px) clamp(64px, 9vh, 100px);
+  box-sizing: border-box;
+}
+
+.ta-closing-top-fade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 326px;
+  background: linear-gradient(180deg, #DE2A59 0%, rgba(250, 235, 167, 0) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.ta-closing-bottom-fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 68%;
+  background: linear-gradient(180deg, rgba(250, 235, 167, 0) 0%, #A92E91 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.ta-closing-inner {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  max-width: 1290px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(24px, 3.8vh, 44px);
+}
+
+.ta-closing-title-wrap {
+  width: min(1040px, 94vw);
+}
+
+.ta-closing-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(300px, 490px) minmax(340px, 736px);
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(24px, 3.5vw, 52px);
+}
+
+/* Left Visual Composition: Tilted Book (#620:465) + Mascot BAWI (#620:559) */
+.ta-closing-visual {
+  position: relative;
+  width: 100%;
+  max-width: 490px;
+  aspect-ratio: 490 / 540;
+  margin-inline: auto;
+  cursor: pointer;
+}
+
+.ta-closing-book-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 78%;
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 1;
+  transition:
+    transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1),
+    filter 0.55s ease;
+}
+
+.ta-closing-visual:hover .ta-closing-book-img {
+  transform: translate(-10px, -12px) rotate(-6deg) scale(1.05);
+  filter:
+    drop-shadow(0px 18px 32px rgba(222, 47, 90, 0.45))
+    drop-shadow(0px 0px 24px rgba(255, 255, 255, 0.7));
+}
+
+.ta-closing-mascot-img {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 82%;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0px 19.87px 19.87px rgba(236, 110, 142, 0.95));
+  animation: taMascotFloat 3.8s ease-in-out infinite;
+  z-index: 2;
+  transition:
+    transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1),
+    filter 0.55s ease;
+}
+
+.ta-closing-visual:hover .ta-closing-mascot-img {
+  filter:
+    drop-shadow(0px 28px 34px rgba(236, 110, 142, 1))
+    drop-shadow(0px 0px 24px rgba(253, 233, 172, 0.75))
+    brightness(1.04);
+}
+
+/* Right Column: Main Card (#620:561) + Salam Budaya Pill (#620:560) */
+.ta-closing-right-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(22px, 3vh, 36px);
+  width: 100%;
+}
+
+.ta-closing-card {
+  width: 100%;
+  border-radius: 15.92px;
+  background: linear-gradient(180deg, #FDE9AC 0%, #DE2F5A 100%);
+  box-shadow: 0px 11.91px 8.93px rgba(0, 0, 0, 0.25);
+  padding: clamp(32px, 4.5vw, 64px) clamp(26px, 4.2vw, 58px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(18px, 2.2vw, 28px);
+  box-sizing: border-box;
+  cursor: pointer;
+  transition:
+    transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.45s ease;
+}
+
+.ta-closing-card:hover {
+  transform: translateY(-8px) scale(1.012);
+  box-shadow:
+    0px 24px 42px rgba(222, 47, 90, 0.36),
+    0px 12px 22px rgba(0, 0, 0, 0.26);
+}
+
+.ta-closing-paragraph {
+  font-weight: 700;
+  font-size: clamp(18px, 1.95vw, 28px);
+  line-height: 1.3;
+  text-align: left;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.ta-closing-paragraph:hover {
+  transform: translateX(7px) scale(1.012);
+}
+
+.ta-closing-paragraph .ta-outlined-grad__stroke {
+  -webkit-text-stroke: 7px #FFFFFF;
+  filter: drop-shadow(-4.29px 8.57px 4.29px rgba(0, 0, 0, 0.25));
+}
+
+.ta-closing-paragraph .ta-outlined-grad__fill {
+  background: linear-gradient(90deg, #DE2A59 45%, #FD8A2F 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Salam Budaya Pill (#620:560 & #620:562) */
+.ta-salam-pill {
+  position: relative;
+  overflow: hidden;
+  width: min(656px, 100%);
+  min-height: 78px;
+  padding: 16px 28px;
+  border-radius: 24.27px;
+  background: linear-gradient(180deg, #FDE9AC 0%, #FD8A2F 100%);
+  box-shadow: 0px 18.15px 13.62px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition:
+    transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.45s ease;
+}
+
+.ta-salam-pill:hover {
+  transform: translateY(-7px) scale(1.04);
+  box-shadow:
+    0px 24px 38px rgba(222, 47, 90, 0.4),
+    0px 0px 24px rgba(253, 233, 172, 0.7);
+}
+
+.ta-salam-pill-row {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.ta-salam-pill-text {
+  display: inline-block;
+  font-weight: 700;
+  font-size: clamp(19px, 2.03vw, 29.3px);
+  text-align: center;
+  line-height: 1.2;
+}
+
+.ta-salam-heart {
+  display: inline-block;
+  font-size: clamp(20px, 2.1vw, 30px);
+  line-height: 1;
+  filter: drop-shadow(-3px 6px 4px rgba(0, 0, 0, 0.28));
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.ta-salam-pill:hover .ta-salam-heart {
+  animation: taHeartBeat 0.75s ease-in-out infinite;
+}
+
+@keyframes taHeartBeat {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+  }
+  35% {
+    transform: scale(1.28) rotate(-8deg);
+  }
+  70% {
+    transform: scale(1.14) rotate(8deg);
+  }
+}
+
+.ta-salam-pill-text .ta-outlined-grad__stroke {
+  -webkit-text-stroke: 7px #FFFFFF;
+  filter: drop-shadow(-4.48px 8.96px 4.48px rgba(0, 0, 0, 0.25));
+}
+
+.ta-salam-pill-text .ta-outlined-grad__fill {
+  background: linear-gradient(90deg, #DE2A59 45%, #FD8A2F 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ==========================================================================
+   SECTION 5: FOOTER (Figma Frame #620:572)
+   ========================================================================== */
+.ta-footer-wrapper .about-footer-section {
+  background: linear-gradient(2deg, #DE2A59 0%, #FAEBA7 100%);
+}
+
+/* ==========================================================================
+   TABLET & MOBILE RESPONSIVE BREAKPOINTS
+   (Desktop >1024px is 100% locked; Opsi B applied for Section 2 <=1024px)
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .ta-intro-section {
+    min-height: auto;
+    padding: 56px 20px 64px;
+  }
+
+  .ta-intro-inner {
+    gap: 22px;
+  }
+
+  .ta-intro-stage {
+    min-height: auto;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  /* Opsi B: Centered Auto-Height Speech Bubble Cards with Directional Tails */
+  .ta-speech-bubble {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    width: min(500px, 92vw);
+    height: auto;
+    aspect-ratio: auto;
+    border-radius: 20px;
+    filter: drop-shadow(0px 10px 20px rgba(0, 0, 0, 0.24));
+  }
+
+  .ta-speech-bubble--left {
+    background: linear-gradient(180deg, #FDA22F 32%, #FDE9AC 100%);
+    margin-bottom: 6px;
+  }
+
+  .ta-speech-bubble--right {
+    background: linear-gradient(180deg, #FDA22F 22%, #FDE9AC 90%);
+    margin-top: 6px;
+  }
+
+  .ta-speech-bubble__bg {
+    display: none;
+  }
+
+  .ta-speech-bubble__mobile-tail {
+    display: block;
+    position: absolute;
+    width: 36px;
+    height: 22px;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .ta-mobile-tail--down {
+    bottom: -19px;
+    left: 56%;
+    transform: translateX(-50%);
+  }
+
+  .ta-mobile-tail--up {
+    top: -19px;
+    left: 44%;
+    transform: translateX(-50%);
+  }
+
+  .ta-speech-bubble__content,
+  .ta-speech-bubble__content--left,
+  .ta-speech-bubble__content--right {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    height: auto;
+    padding: 20px 26px;
+  }
+
+  .ta-bubble-outlined-text--left {
+    font-size: 18px;
+    line-height: 1.35;
+  }
+
+  .ta-bubble-outlined-text--right {
+    font-size: 16px;
+    line-height: 1.4;
+  }
+
+  .ta-bubble-outlined-text__stroke {
+    -webkit-text-stroke: 3.4px #E86568;
+  }
+
+  .ta-intro-mascot-wrap {
+    width: min(240px, 46vw);
+  }
+
+  .ta-closing-grid {
+    grid-template-columns: 1fr;
+    max-width: 680px;
+    margin-inline: auto;
+  }
+
+  .ta-closing-visual {
+    max-width: 380px;
+  }
+}
+
+@media (max-width: 768px) {
+  .ta-cover-section {
+    min-height: 92vh;
+    padding: 104px 16px 56px;
+  }
+
+  .ta-cover-monas {
+    width: 42vw;
+    opacity: 0.9;
+  }
+
+  .ta-cover-monas--left {
+    left: -10%;
+  }
+
+  .ta-cover-monas--right {
+    right: -10%;
+  }
+
+  .ta-cover-book-img {
+    width: min(380px, 80vw);
+  }
+
+  /* Section 2 Mobile (Opsi B: Clean Stacked Cards + Proportional Stripes & Banner) */
+  .ta-intro-section {
+    min-height: auto;
+    padding: 40px 14px 48px;
+  }
+
+  .ta-intro-section .ta-stripes-bg {
+    object-fit: fill;
+  }
+
+  .ta-intro-inner {
+    gap: 16px;
+  }
+
+  .ta-intro-title-wrap {
+    width: min(340px, 92vw);
+  }
+
+  .ta-intro-stage {
+    min-height: auto;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .ta-speech-bubble {
+    width: min(358px, 94vw);
+    border-radius: 18px;
+  }
+
+  .ta-speech-bubble__mobile-tail {
+    width: 32px;
+    height: 18px;
+  }
+
+  .ta-mobile-tail--down {
+    bottom: -15px;
+  }
+
+  .ta-mobile-tail--up {
+    top: -15px;
+  }
+
+  .ta-speech-bubble__content--left {
+    padding: 16px 20px;
+  }
+
+  .ta-speech-bubble__content--right {
+    padding: 16px 18px;
+  }
+
+  .ta-bubble-outlined-text--left {
+    font-size: 16px;
+    line-height: 1.34;
+  }
+
+  .ta-bubble-outlined-text--right {
+    font-size: 14px;
+    line-height: 1.42;
+  }
+
+  .ta-bubble-outlined-text__stroke {
+    -webkit-text-stroke: 2.8px #E86568;
+  }
+
+  .ta-intro-mascot-wrap {
+    width: min(195px, 52vw);
+    margin-block: 0;
+  }
+
+  .ta-intro-mascot-img {
+    filter: drop-shadow(0px 14px 16px rgba(236, 110, 142, 0.9));
+  }
+
+  .ta-intro-bottom-banner {
+    width: min(358px, 94vw);
+    padding: 16px 18px;
+    min-height: auto;
+    border-radius: 16px;
+  }
+
+  .ta-intro-banner-text {
+    font-size: clamp(14.5px, 4.1vw, 17px);
+    line-height: 1.42;
+  }
+
+  .ta-intro-banner-text .ta-outlined-grad__stroke {
+    -webkit-text-stroke: 3.6px #FFFFFF;
+    filter: drop-shadow(-2.5px 5px 3px rgba(0, 0, 0, 0.25));
+  }
+
+  /* Key Answer Mobile Adjustments */
+  .ta-key-section {
+    padding: 40px 14px 48px;
+  }
+
+  .ta-key-board {
+    padding: 24px 16px 28px;
+    gap: 28px;
+  }
+
+  .ta-key-question .ta-outlined-grad__stroke {
+    -webkit-text-stroke: 5px #FFFFFF;
+    filter: drop-shadow(-3px 6px 3px rgba(0, 0, 0, 0.25));
+  }
+
+  .ta-plaque-badge {
+    margin-left: 0;
+    width: min(240px, 74vw);
+  }
+
+  .ta-plaque-text__stroke {
+    -webkit-text-stroke: 4px #E55A66;
+  }
+
+  .ta-key-explanation-box {
+    width: 100%;
+    margin-left: 0;
+    padding: 16px 18px;
+    min-height: auto;
+  }
+
+  /* Closing Mobile Adjustments */
+  .ta-closing-section {
+    min-height: auto;
+    padding: 48px 16px 64px;
+  }
+
+  .ta-closing-visual {
+    max-width: 310px;
+  }
+
+  .ta-closing-card {
+    padding: 26px 20px;
+    gap: 16px;
+  }
+
+  .ta-closing-paragraph .ta-outlined-grad__stroke,
+  .ta-salam-pill-text .ta-outlined-grad__stroke {
+    -webkit-text-stroke: 5px #FFFFFF;
+  }
+
+  .ta-salam-pill {
+    min-height: 64px;
+    padding: 14px 20px;
+    border-radius: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ta-bubble-outlined-text--left {
+    font-size: 15.5px;
+  }
+
+  .ta-bubble-outlined-text--right {
+    font-size: 13.5px;
+  }
+
+  .ta-bubble-outlined-text__stroke {
+    -webkit-text-stroke: 2.5px #E86568;
+  }
+
+  .ta-key-question {
+    font-size: 16.5px;
+  }
+
+  .ta-closing-paragraph {
+    font-size: 16.5px;
+  }
+
+  .ta-salam-pill-text {
+    font-size: 17.5px;
+  }
+}

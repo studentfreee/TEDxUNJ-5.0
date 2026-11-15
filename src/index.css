@@ -6086,15 +6086,43 @@ h3 {
   color: #F5F5F6;
   text-decoration: none;
   letter-spacing: 0.05em;
+  white-space: nowrap;
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 6px;
   cursor: pointer;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease, color 0.2s ease;
 }
 
 .betawi-nav-link:hover {
   opacity: 0.85;
+}
+
+.betawi-nav-link.active {
+  color: var(--betawi-gold-light);
+}
+
+.betawi-nav-link.active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--betawi-gold-light);
+  box-shadow: 0 0 8px rgba(250, 235, 167, 0.75);
+}
+
+@media (max-width: 1180px) and (min-width: 1025px) {
+  .betawi-header {
+    padding: 20px 36px;
+  }
+
+  .betawi-nav {
+    gap: 24px;
+  }
 }
 
 /* Figma CTA Button: RESERVE A PASS */

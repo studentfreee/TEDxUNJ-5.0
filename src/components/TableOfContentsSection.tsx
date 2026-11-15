@@ -36,7 +36,8 @@ export default function TableOfContentsSection({ navigate }: TableOfContentsSect
     { num: '02', title: 'Speakers & Venue', targetId: 'event-speakers-section', path: '/event' },
     { num: '03', title: 'Exclusive Merchandise', targetId: 'event-benefits-section', path: '/event' },
     { num: '04', title: 'Ticketing', targetId: 'event-comingsoon-section', path: '/event' },
-    { num: '05', title: 'Inside TEDx', targetId: 'app', path: '/about' }
+    { num: '05', title: 'Inside TEDx', targetId: 'app', path: '/about' },
+    { num: '06', title: 'Task Answer', targetId: 'task-answer-hero', path: '/task-answer' }
   ];
 
   const handleMenuClick = (e: React.MouseEvent, item: typeof menuItems[0]) => {

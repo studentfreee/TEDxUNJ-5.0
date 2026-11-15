@@ -13,6 +13,7 @@ import {
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import EventPage from './pages/EventPage';
+import TaskAnswerPage from './pages/TaskAnswerPage';
 import { EARLY_BIRD_FORM_URL } from './constants';
 
 export default function App() {
@@ -254,6 +255,17 @@ export default function App() {
           >
             ABOUT <img src="/assets/betawi/dropdown_icon.svg" alt="v" style={{ width: 12, height: 12, marginLeft: 2 }} />
           </a>
+          <a
+            href="/task-answer"
+            className={`betawi-nav-link ${location.pathname === '/task-answer' ? 'active' : ''}`}
+            onClick={(e) => {
+              e.preventDefault();
+              navigate('/task-answer');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+          >
+            TASK ANSWER
+          </a>
 
           <a
             href={EARLY_BIRD_FORM_URL}
@@ -282,6 +294,8 @@ export default function App() {
           <EventPage addToCart={addToCart} ticketTypes={ticketTypes} />
         ) : location.pathname === '/about' ? (
           <AboutPage />
+        ) : location.pathname === '/task-answer' ? (
+          <TaskAnswerPage />
         ) : (
           <HomePage
             scrollProgress={scrollProgress}
@@ -366,6 +380,21 @@ export default function App() {
             >
               <span className="item-text">ABOUT</span>
               {location.pathname === '/about' && <span className="item-dot"></span>}
+            </a>
+
+            <a
+              href="/task-answer"
+              className={`sheet-nav-item ${location.pathname === '/task-answer' ? 'active' : ''}`}
+              onClick={(e) => {
+                e.preventDefault();
+                navigate('/task-answer');
+                setActiveMenu('task-answer');
+                setIsMenuOpen(false);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+            >
+              <span className="item-text">TASK ANSWER</span>
+              {location.pathname === '/task-answer' && <span className="item-dot"></span>}
             </a>
           </nav>
 
